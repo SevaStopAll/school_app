@@ -1,4 +1,9 @@
 package ru.sevastopall.school_app.repository;
 
-public interface StudentRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import ru.sevastopall.school_app.domain.Student;
+
+@Repository
+public interface StudentRepository extends CrudRepository<Student, Integer> {
 }
