@@ -1,4 +1,4 @@
   CREATE TABLE teacher (
-    id serial primary key not null,
+    id serial primary key,
     name varchar(256)
 );

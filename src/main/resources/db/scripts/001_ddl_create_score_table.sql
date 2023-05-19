@@ -1,4 +1,4 @@
   CREATE TABLE score (
-    id serial primary key not null,
+    id serial primary key,
     description int unique
 );

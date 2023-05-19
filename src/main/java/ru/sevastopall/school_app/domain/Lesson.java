@@ -10,22 +10,21 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "homework")
-public class Homework {
+@Table(name = "lesson")
+public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
-
-    @OneToOne
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 }
