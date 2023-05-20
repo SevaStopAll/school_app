@@ -15,4 +15,6 @@
     <include file="db/scripts/008_ddl_create_lesson_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/009_ddl_create_homework_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/010_ddl_create_mark_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/011_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/012_ddl_create_school_day_lesson_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

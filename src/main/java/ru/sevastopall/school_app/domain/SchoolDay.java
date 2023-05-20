@@ -5,24 +5,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "subject")
-public class Subject {
+@Table(name = "school_day")
+public class SchoolDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+
+    private LocalDate date;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "subject_teacher",
-            joinColumns = { @JoinColumn(name = "subject_id") },
-            inverseJoinColumns = { @JoinColumn(name = "teacher_id") }
+            name = "school_day_lesson",
+            joinColumns = { @JoinColumn(name = "school_day_id") },
+            inverseJoinColumns = { @JoinColumn(name = "lesson_id") }
     )
-    private Set<Teacher> teachers;
+    private Set<Lesson> lessons;
+
+
 }
