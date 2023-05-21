@@ -4,7 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.sevastopall.school_app.domain.Homework;
+import ru.sevastopall.school_app.domain.Mark;
 import ru.sevastopall.school_app.service.*;
 
 @Controller
@@ -20,6 +24,7 @@ public class TeacherController {
     private ScoreService score;
 
     private StudentService students;
+    private HomeworkService homeworks;
 
 
     @GetMapping("/homework/create")
@@ -30,12 +35,11 @@ public class TeacherController {
         return "teacher/homework/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+   @PostMapping("/homework/create")
+    public String save(@ModelAttribute Homework homework) {
+        homeworks.add(homework);
         return "redirect:/index";
-    }*/
+    }
 
     @GetMapping("/mark/create")
     public String getMarkCreationPage(Model model) {
@@ -45,10 +49,9 @@ public class TeacherController {
         return "teacher/mark/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+    @PostMapping("/marks/create")
+    public String save(@ModelAttribute Mark mark) {
+        marks.save(mark);
         return "redirect:/index";
-    }*/
+    }
 }
