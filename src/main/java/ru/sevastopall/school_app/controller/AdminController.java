@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sevastopall.school_app.service.SchoolClassService;
-import ru.sevastopall.school_app.service.SubjectService;
-import ru.sevastopall.school_app.service.TeacherService;
-
-import javax.servlet.http.HttpServletRequest;
+import ru.sevastopall.school_app.domain.*;
+import ru.sevastopall.school_app.service.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -17,24 +14,21 @@ public class AdminController {
 
     private TeacherService teachers;
     private SchoolClassService classes;
-
     private SubjectService subjects;
+    private StudentService students;
+
+    private LessonService lessons;
 
     @GetMapping("/teachers/create")
     public String getTeachersCreationPage(Model model) {
         return "admin/teachers/create";
     }
 
-/*    @PostMapping("/teachers/create")
-    public String create(@ModelAttribute Vacancy vacancy, @RequestParam MultipartFile file, Model model) {
-        try {
-            vacancyService.save(vacancy, new FileDto(file.getOriginalFilename(), file.getBytes()));
-            return "redirect:/vacancies";
-        } catch (Exception exception) {
-            model.addAttribute("message", exception.getMessage());
-            return "errors/404";
-        }
-    }*/
+    @PostMapping("/teachers/create")
+    public String create(@ModelAttribute Teacher teacher, Model model) {
+        teachers.save(teacher);
+        return "redirect:/index";
+    }
 
     @GetMapping("/subjects/create")
     public String getSubjectCreationPage(Model model) {
@@ -42,24 +36,22 @@ public class AdminController {
         return "admin/subjects/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
-        return "redirect:/index";
-    }*/
+   @PostMapping("/subjects/create")
+    public String save(@ModelAttribute Subject subject) {
+       subjects.save(subject);
+       return "redirect:/index";
+    }
 
     @GetMapping("/classes/create")
     public String getClassCreationPage(Model model) {
         return "admin/classes/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+    @PostMapping("/subjects/create")
+    public String save(@ModelAttribute SchoolClass schoolclass) {
+        classes.save(schoolclass);
         return "redirect:/index";
-    }*/
+    }
 
     @GetMapping("/students/create")
     public String getStudentCreationPage(Model model) {
@@ -67,12 +59,11 @@ public class AdminController {
         return "admin/students/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+    @PostMapping("/students/create")
+    public String save(@ModelAttribute Student student) {
+        students.save(student);
         return "redirect:/index";
-    }*/
+    }
 
     @GetMapping("/lessons/create")
     public String getLessonCreationPage(Model model) {
@@ -82,11 +73,10 @@ public class AdminController {
         return "admin/lessons/create";
     }
 
-/*    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
-        String[] ids = req.getParameterValues("rIds");
-        accidents.create(accident, ids);
+    @PostMapping("/lessons/create")
+    public String save(@ModelAttribute Lesson lesson) {
+        lessons.save(lesson);
         return "redirect:/index";
-    }*/
+    }
 
 }
