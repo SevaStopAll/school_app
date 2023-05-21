@@ -1,3 +1,4 @@
+/*
 package ru.sevastopall.school_app;
 
 import java.util.Objects;
@@ -67,3 +68,4 @@ public class User {
         return Objects.hash(id);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package ru.sevastopall.school_app.filter;
 
 import org.springframework.core.annotation.Order;
@@ -33,3 +34,4 @@ public class SessionFilter extends HttpFilter {
     }
 
 }
+*/

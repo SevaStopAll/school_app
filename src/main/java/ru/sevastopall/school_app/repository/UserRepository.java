@@ -1,9 +1,13 @@
-package ru.sevastopall.school_app;
+/*
+package ru.sevastopall.school_app.repository;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface UserRepository {
+
     Optional<User> save(User user);
 
     Optional<User> findByEmailAndPassword(String email, String password);
+
 }
+*/

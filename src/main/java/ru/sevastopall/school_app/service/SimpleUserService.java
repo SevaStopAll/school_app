@@ -1,3 +1,4 @@
+/*
 package ru.sevastopall.school_app;
 
 import org.springframework.stereotype.Service;
@@ -22,3 +23,4 @@ public class SimpleUserService implements UserService {
         return userRepository.findByEmailAndPassword(email, password);
     }
 }
+*/

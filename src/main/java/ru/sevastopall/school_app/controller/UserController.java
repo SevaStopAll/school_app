@@ -1,3 +1,4 @@
+/*
 package ru.sevastopall.school_app.controller;
 
 import org.springframework.stereotype.Controller;
@@ -59,3 +60,4 @@ public class UserController {
         return "redirect:/users/login";
     }
 }
+*/

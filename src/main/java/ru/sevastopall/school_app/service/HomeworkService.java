@@ -4,15 +4,16 @@ import ru.sevastopall.school_app.domain.*;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 public interface HomeworkService {
 
     Optional<Homework> add(Homework homework);
 
-    Collection<Homework> findByStudent(Student student);
+    Set<Homework> findBySubject(Subject subject);
 
-    Collection<Homework> findByTeacher(Teacher teacher);
+    Set<Homework> findBySchoolClass(SchoolClass schoolClass);
 
-    Collection<Homework> findBySubject(Subject subject);
+    Set<Homework> findByLesson(Lesson lesson);
 
 }
