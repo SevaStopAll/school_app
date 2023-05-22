@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/admin")
 @AllArgsConstructor
@@ -25,7 +28,7 @@ public class AdminController {
     }
 
     @PostMapping("/teachers/create")
-    public String create(@ModelAttribute Teacher teacher, Model model) {
+    public String saveTeacher(@ModelAttribute Teacher teacher, Model model) {
         teachers.save(teacher);
         return "redirect:/index";
     }
@@ -37,9 +40,14 @@ public class AdminController {
     }
 
    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute Subject subject) {
+    public String saveSubject(@ModelAttribute Subject subject, String[] teachersIds) {
+       Set<Teacher> teacherSet = new HashSet<>();
+       for (String id : teachersIds) {
+           teacherSet.add(teachers.findById(Integer.parseInt(id)).get());
+       }
+       subject.setTeachers(teacherSet);
        subjects.save(subject);
-       return "redirect:/index";
+       return "redirect:/";
     }
 
     @GetMapping("/classes/create")
@@ -47,8 +55,8 @@ public class AdminController {
         return "admin/classes/create";
     }
 
-    @PostMapping("/subjects/create")
-    public String save(@ModelAttribute SchoolClass schoolclass) {
+    @PostMapping("/classes/create")
+    public String saveClass(@ModelAttribute SchoolClass schoolclass) {
         classes.save(schoolclass);
         return "redirect:/index";
     }
@@ -60,7 +68,8 @@ public class AdminController {
     }
 
     @PostMapping("/students/create")
-    public String save(@ModelAttribute Student student) {
+    public String saveStudent(@ModelAttribute Student student, String classId) {
+        student.setSchoolClass(classes.findById(Integer.parseInt(classId)).get());
         students.save(student);
         return "redirect:/index";
     }
@@ -74,7 +83,7 @@ public class AdminController {
     }
 
     @PostMapping("/lessons/create")
-    public String save(@ModelAttribute Lesson lesson) {
+    public String saveLesson(@ModelAttribute Lesson lesson) {
         lessons.save(lesson);
         return "redirect:/index";
     }

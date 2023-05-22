@@ -1,4 +1,4 @@
-create table mark (
+create table if not exists mark (
     id serial primary key,
     score_id int references score(id),
     student_id int references student(id),

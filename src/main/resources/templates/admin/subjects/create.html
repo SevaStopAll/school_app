@@ -34,14 +34,14 @@
         </div>
     </nav>
     <div class="container">
-        <form class="mt-3" th:action="@{/admin/subject/create}" method="post" enctype="multipart/form-data">
+        <form class="mt-3" th:action="@{/admin/subjects/create}" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label"><b>Имя</b></label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя преподавателя">
             </div>
             <div class="form-group">
-                <label for="teacher.id" name="rIds">Учителя</label>
-                <select class="form-control" id="teacher.id" name="rIds" multiple>
+                <label for="teacher.id" name="teachersIds">Учителя</label>
+                <select class="form-control" id="teacher.id" name="teachersIds" multiple>
                     <option th:each="teacher: ${teachers}"
                             th:text="${teacher.name}"
                             th:value="${teacher.id}"></option>

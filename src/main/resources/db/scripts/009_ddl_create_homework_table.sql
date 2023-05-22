@@ -1,4 +1,4 @@
-CREATE TABLE homework (
+CREATE TABLE if not exists homework (
     id serial primary key,
     description varchar(1024),
     lesson_id int references lesson(id),

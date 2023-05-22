@@ -21,7 +21,7 @@ public class Lesson {
     private Subject subject;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
+    @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClass;
 
     @ManyToOne

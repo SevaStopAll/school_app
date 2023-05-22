@@ -24,4 +24,9 @@ public class SimpleTeacherService implements TeacherService {
     public Set<Teacher> findAll() {
         return teachers.findAll();
     }
+
+    @Override
+    public Optional<Teacher> findById(int id) {
+        return teachers.findById(id);
+    }
 }

@@ -1,4 +1,4 @@
-create table lesson(
+create table if not exists lesson(
     id serial primary key,
     subject_id int references subject(id),
     teacher_id int references teacher(id),

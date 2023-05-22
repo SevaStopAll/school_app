@@ -41,8 +41,8 @@
             </div>
 
             <div class="form-group">
-                <label for="subject.id">Предмет</label>
-                <select class="form-control" id="subject.id"  name="type.id">
+                <label for="subject">Предмет</label>
+                <select class="form-control" id="subject"  name="subject">
                     <option th:each="subject: ${subjects}"
                             th:text="${subject.name}"
                             th:value="${subject.id}"></option>
@@ -50,8 +50,8 @@
             </div>
 
             <div class="form-group">
-                <label for="class.id">Класс</label>
-                <select class="form-control" id="class.id"  name="type.id">
+                <label for="schoolClass">Класс</label>
+                <select class="form-control" id="schoolClass"  name="schoolClass">
                     <option th:each="class: ${classes}"
                             th:text="${class.name}"
                             th:value="${class.id}"></option>
@@ -59,8 +59,8 @@
             </div>
 
             <div class="form-group">
-                <label for="teacher.id">Учитель</label>
-                <select class="form-control" id="teacher.id"  name="type.id">
+                <label for="teacher">Учитель</label>
+                <select class="form-control" id="teacher"  name="teacher">
                     <option th:each="teacher: ${teachers}"
                             th:text="${teacher.name}"
                             th:value="${teacher.id}"></option>
