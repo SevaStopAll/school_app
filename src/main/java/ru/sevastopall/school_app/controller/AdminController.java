@@ -19,7 +19,6 @@ public class AdminController {
     private SchoolClassService classes;
     private SubjectService subjects;
     private StudentService students;
-
     private LessonService lessons;
 
     @GetMapping("/teachers/create")
@@ -28,9 +27,15 @@ public class AdminController {
     }
 
     @PostMapping("/teachers/create")
-    public String saveTeacher(@ModelAttribute Teacher teacher, Model model) {
+    public String saveTeacher(@ModelAttribute Teacher teacher) {
         teachers.save(teacher);
         return "redirect:/index";
+    }
+
+    @GetMapping("/teachers/list")
+    public String getTeachers(Model model) {
+        model.addAttribute("teachers", teachers.findAll());
+        return "admin/teachers/list";
     }
 
     @GetMapping("/subjects/create")
@@ -50,8 +55,14 @@ public class AdminController {
        return "redirect:/";
     }
 
+    @GetMapping("/subjects/list")
+    public String getSubjects(Model model) {
+        model.addAttribute("subjects", subjects.findAll());
+        return "admin/subjects/list";
+    }
+
     @GetMapping("/classes/create")
-    public String getClassCreationPage(Model model) {
+    public String getClassCreationPage() {
         return "admin/classes/create";
     }
 
@@ -59,6 +70,12 @@ public class AdminController {
     public String saveClass(@ModelAttribute SchoolClass schoolclass) {
         classes.save(schoolclass);
         return "redirect:/index";
+    }
+
+    @GetMapping("/classes/list")
+    public String getClasses(Model model) {
+        model.addAttribute("classes", classes.findAll());
+        return "admin/classes/list";
     }
 
     @GetMapping("/students/create")
@@ -72,6 +89,12 @@ public class AdminController {
         student.setSchoolClass(classes.findById(Integer.parseInt(classId)).get());
         students.save(student);
         return "redirect:/index";
+    }
+
+    @GetMapping("/students/list")
+    public String getStudents(Model model) {
+        model.addAttribute("students", students.findAll());
+        return "admin/students/list";
     }
 
     @GetMapping("/lessons/create")
@@ -88,4 +111,9 @@ public class AdminController {
         return "redirect:/index";
     }
 
+    @GetMapping("/lessons/list")
+    public String getLessons(Model model) {
+        model.addAttribute("lessons", lessons.findAll());
+        return "admin/lessons/list";
+    }
 }
