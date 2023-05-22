@@ -69,7 +69,7 @@ public class AdminController {
     @PostMapping("/classes/create")
     public String saveClass(@ModelAttribute SchoolClass schoolclass) {
         classes.save(schoolclass);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/classes/list")
@@ -88,7 +88,7 @@ public class AdminController {
     public String saveStudent(@ModelAttribute Student student, String classId) {
         student.setSchoolClass(classes.findById(Integer.parseInt(classId)).get());
         students.save(student);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/students/list")
@@ -108,7 +108,7 @@ public class AdminController {
     @PostMapping("/lessons/create")
     public String saveLesson(@ModelAttribute Lesson lesson) {
         lessons.save(lesson);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/lessons/list")

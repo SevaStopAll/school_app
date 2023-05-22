@@ -37,7 +37,7 @@ public class TeacherController {
    @PostMapping("/homework/create")
     public String save(@ModelAttribute Homework homework) {
         homeworks.add(homework);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/mark/create")
@@ -52,6 +52,6 @@ public class TeacherController {
     @PostMapping("/mark/create")
     public String save(@ModelAttribute Mark mark) {
         marks.save(mark);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
