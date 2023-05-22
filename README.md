@@ -23,4 +23,6 @@ Launch Main.class /src/main/java/ru.sevastopall.school_app
 - **Maven 3.8**
 - **PostgresSQL 14**
 
-### UI
+### Текущие задачи:
+    Создать расписание как Java сущность, создать корректное его представление в браузере. 
+    
