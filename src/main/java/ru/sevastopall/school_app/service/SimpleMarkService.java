@@ -7,6 +7,7 @@ import ru.sevastopall.school_app.repository.*;
 
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,21 +21,21 @@ public class SimpleMarkService implements MarkService {
 
     @Override
     public Optional<Mark> save(Mark mark) {
-        return Optional.empty();
+        return Optional.of(marks.save(mark));
     }
 
     @Override
-    public Collection<Mark> findByStudent(Student student) {
+    public List<Mark> findByStudentId(int studentId) {
         return null;
     }
 
     @Override
-    public Collection<Mark> findByTeacher(Teacher teacher) {
+    public List<Mark> findByTeacher(Teacher teacher) {
         return null;
     }
 
     @Override
-    public Collection<Mark> findBySubject(Subject subject) {
+    public List<Mark> findBySubject(Subject subject) {
         return null;
     }
 }

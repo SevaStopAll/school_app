@@ -18,7 +18,7 @@ public class Homework {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
+    @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClass;
 
     @ManyToOne

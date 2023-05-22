@@ -35,14 +35,19 @@
     </nav>
     <div class="container">
         <form class="mt-3" th:action="@{/teacher/mark/create}" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="description" class="form-label"><b>Описание</b></label>
-                <input type="text" class="form-control" id="description" name="name" placeholder="Содержание">
+
+            <div class="form-group">
+                <label for="score.id">Оценка</label>
+                <select class="form-control" id="score.id"  name="score">
+                    <option th:each="score: ${scores}"
+                            th:text="${score.description}"
+                            th:value="${score.id}"></option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="student.id">Класс</label>
-                <select class="form-control" id="student.id"  name="type.id">
+                <label for="student.id">Ученик</label>
+                <select class="form-control" id="student.id"  name="student">
                     <option th:each="student: ${students}"
                             th:text="${student.name}"
                             th:value="${student.id}"></option>
@@ -51,7 +56,7 @@
 
             <div class="form-group">
                 <label for="subject.id">Предмет</label>
-                <select class="form-control" id="subject.id"  name="type.id">
+                <select class="form-control" id="subject.id"  name="subject">
                     <option th:each="subject: ${subjects}"
                             th:text="${subject.name}"
                             th:value="${subject.id}"></option>
@@ -59,14 +64,13 @@
             </div>
 
             <div class="form-group">
-                <label for="score.id">Класс</label>
-                <select class="form-control" id="score.id"  name="type.id">
-                    <option th:each="score: ${scores}"
-                            th:text="${score.name}"
-                            th:value="${score.id}"></option>
+                <label for="teacher">Учитель</label>
+                <select class="form-control" id="teacher"  name="teacher">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.name}"
+                            th:value="${teacher.id}"></option>
                 </select>
             </div>
-
 
 
             <div class="mb-3 row">

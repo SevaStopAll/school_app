@@ -17,20 +17,19 @@ import ru.sevastopall.school_app.service.*;
 public class TeacherController {
     private TeacherService teachers;
     private SchoolClassService classes;
-
     private SubjectService subjects;
-
     private MarkService marks;
     private ScoreService score;
-
     private StudentService students;
     private HomeworkService homeworks;
+    private LessonService lessons;
 
 
     @GetMapping("/homework/create")
     public String getHomeworkCreationPage(Model model) {
         model.addAttribute("classes", classes.findAll());
         model.addAttribute("teachers", teachers.findAll());
+        model.addAttribute("lessons", lessons.findAll());
         model.addAttribute("subjects", subjects.findAll());
         return "teacher/homework/create";
     }
@@ -45,11 +44,12 @@ public class TeacherController {
     public String getMarkCreationPage(Model model) {
         model.addAttribute("students", students.findAll());
         model.addAttribute("subjects", subjects.findAll());
-        model.addAttribute("score", score.findAll());
+        model.addAttribute("scores", score.findAll());
+        model.addAttribute("teachers", teachers.findAll());
         return "teacher/mark/create";
     }
 
-    @PostMapping("/marks/create")
+    @PostMapping("/mark/create")
     public String save(@ModelAttribute Mark mark) {
         marks.save(mark);
         return "redirect:/index";

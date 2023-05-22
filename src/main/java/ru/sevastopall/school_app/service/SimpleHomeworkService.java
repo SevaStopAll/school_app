@@ -32,5 +32,4 @@ public class SimpleHomeworkService implements HomeworkService {
         return homeworkRepository.findByLesson(lesson);
     };
 
-
 }
