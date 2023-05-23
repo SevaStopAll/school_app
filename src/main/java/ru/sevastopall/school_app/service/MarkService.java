@@ -12,7 +12,7 @@ public interface MarkService {
 
     List<Mark> findByStudentId(int studentId);
 
-    Collection<Mark> findByTeacher(Teacher teacher);
+    List<Mark> findByTeacher(Teacher teacher);
 
-    Collection<Mark> findBySubject(Subject subject);
+    List<Mark> findBySubject(Subject subject);
 }

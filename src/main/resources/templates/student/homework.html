@@ -47,17 +47,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
-                    <th scope="col">#</th>
                     <th scope="col">Предмет</th>
                     <th scope="col">Задание</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="homework: ${homeworks}">
-                    <td th:text="${homework.id}" />
-                    <td th:text="${homework.subject}" />
-                    <td th:text="${homework.lesson}" />
+                    <td th:text="${homework.subject.name}" />
                     <td th:text="${homework.description}" />
                 </tr>
                 </tbody>

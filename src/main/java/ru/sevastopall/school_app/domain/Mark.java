@@ -31,4 +31,5 @@ public class Mark {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
+
 }

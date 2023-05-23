@@ -48,18 +48,16 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
-                    <th scope="col">#</th>
+                    <th scope="col">Оценка</th>
                     <th scope="col">Предмет</th>
-                    <th scope="col">Класс</th>
                     <th scope="col">Учитель</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="mark: ${marks}">
-                    <td th:text="${mark.id}" />
-                    <td th:text="${mark.score}" />
-                    <td th:text="${mark.subject}" />
+                    <td th:text="${mark.score.description}" />
+                    <td th:text="${mark.subject.name}" />
+                    <td th:text="${mark.teacher.name}" />
                 </tr>
                 </tbody>
             </table>

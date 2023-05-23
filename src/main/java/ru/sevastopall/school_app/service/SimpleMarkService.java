@@ -26,16 +26,16 @@ public class SimpleMarkService implements MarkService {
 
     @Override
     public List<Mark> findByStudentId(int studentId) {
-        return null;
+        return marks.findByStudentId(studentId);
     }
 
     @Override
     public List<Mark> findByTeacher(Teacher teacher) {
-        return null;
+        return marks.findByTeacher(teacher);
     }
 
     @Override
     public List<Mark> findBySubject(Subject subject) {
-        return null;
+        return marks.findBySubject(subject);
     }
 }
