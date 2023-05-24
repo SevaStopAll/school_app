@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -20,8 +22,8 @@ public class AdminController {
     private SubjectService subjects;
     private StudentService students;
     private LessonService lessons;
-
     private SchoolDayService days;
+    private ClassDayService classDays;
 
     @GetMapping("/teachers/create")
     public String getTeachersCreationPage(Model model) {
@@ -134,6 +136,30 @@ public class AdminController {
     public String getSchoolDays(Model model) {
         model.addAttribute("schoolDays", days.findAll());
         return "admin/schedule/day/list";
+    }
+
+    @GetMapping("/schedule/class/create")
+    public String getClassDayCreationPage(Model model) {
+        model.addAttribute("schoolDays", days.findAll());
+        model.addAttribute("schoolClasses", classes.findAll());
+        model.addAttribute("lessons", lessons.findAll());
+        return "admin/schedule/class/create";
+    }
+
+    @PostMapping("/schedule/class/create")
+    public String saveClassDay(@ModelAttribute ClassDay classday, String lesson1,
+                               String lesson2, String lesson3) {
+        classday.setLessons(List.of(lessons.findById(Integer.parseInt(lesson1)).get(),
+                lessons.findById(Integer.parseInt(lesson2)).get(),
+                lessons.findById(Integer.parseInt(lesson3)).get()));
+        classDays.save(classday);
+        return "redirect:/";
+    }
+
+    @GetMapping("/schedule/class/list")
+    public String getClassDays(Model model) {
+        model.addAttribute("classDays", classDays.findAll());
+        return "admin/schedule/class/list";
     }
 
 }

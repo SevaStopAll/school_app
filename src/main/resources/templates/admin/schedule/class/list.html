@@ -55,16 +55,19 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
                     <th scope="col">#</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Ученики</th>
+                    <th scope="col">День недели</th>
+                    <th scope="col">Класс</th>
+                    <th scope="col">Уроки</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="classDay: ${classDays}">
                     <td th:text="${classDay.id}" />
-                    <td><a th:text="${classDay.name}"></a></td>
+                    <td th:text="${classDay.schoolDay.name}" />
+                    <td th:text="${classDay.schoolClass.name}" />
+                    <td th:text="${classDay.getLessons()}" />
                 </tr>
                 </tbody>
             </table>

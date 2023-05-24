@@ -16,10 +16,7 @@ public class ClassDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_class_id")
-    private SchoolClass schoolClass;
+    private String name;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(
@@ -31,5 +28,19 @@ public class ClassDay {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_day_id")
-    private SchoolDay day;
+    private SchoolDay schoolDay;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_class_id")
+    private SchoolClass schoolClass;
+
+    public String getLessons() {
+        StringBuilder builder = new StringBuilder();
+        int i = 1;
+        for (Lesson lesson : lessons) {
+            builder.append(i++ + ".  ");
+            builder.append(lesson.getName() + " ");
+        }
+        return builder.toString();
+    }
 }
