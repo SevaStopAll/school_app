@@ -21,6 +21,8 @@ public class AdminController {
     private StudentService students;
     private LessonService lessons;
 
+    private SchoolDayService days;
+
     @GetMapping("/teachers/create")
     public String getTeachersCreationPage(Model model) {
         return "admin/teachers/create";
@@ -116,4 +118,22 @@ public class AdminController {
         model.addAttribute("lessons", lessons.findAll());
         return "admin/lessons/list";
     }
+
+    @GetMapping("/schedule/day/create")
+    public String getDayCreationPage(Model model) {
+        return "admin//schedule/day/create";
+    }
+
+    @PostMapping("/schedule/day/create")
+    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay) {
+        days.save(schoolDay);
+        return "redirect:/";
+    }
+
+    @GetMapping("/schedule/day/list")
+    public String getSchoolDays(Model model) {
+        model.addAttribute("schoolDays", days.findAll());
+        return "admin/schedule/day/list";
+    }
+
 }
