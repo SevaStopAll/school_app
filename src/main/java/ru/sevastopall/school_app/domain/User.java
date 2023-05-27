@@ -1,5 +1,5 @@
-/*
-package ru.sevastopall.school_app;
+
+package ru.sevastopall.school_app.domain;
 
 import java.util.Objects;
 
@@ -69,4 +69,4 @@ public class User {
         return Objects.hash(id);
     }
 }
-*/
+
