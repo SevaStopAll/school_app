@@ -18,4 +18,8 @@
     <include file="db/scripts/011_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/012_ddl_create_class_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/013_ddl_create_class_day_lesson_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/014_ddl_create_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/015_ddl_create_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/016_ddl_create_user_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/017_dml_insert_role_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -1,13 +1,14 @@
-/*
 package ru.sevastopall.school_app.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import ru.sevastopall.school_app.domain.User;
 
 import java.util.Optional;
 
-public interface UserRepository {
-
-    Optional<User> save(User user);
-
-    Optional<User> findByEmailAndPassword(String email, String password);
-
+@Service
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findUserByLoginAndPassword(String login, String password);
+    Optional<User> findByLogin(String login);
+    Optional<User> findById(int userId);
 }
-*/

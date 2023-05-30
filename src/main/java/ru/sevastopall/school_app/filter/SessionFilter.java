@@ -1,9 +1,9 @@
-/*
 package ru.sevastopall.school_app.filter;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import ru.job4j.dreamjob.model.User;
+import ru.sevastopall.school_app.domain.User;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,7 +18,8 @@ import java.io.IOException;
 public class SessionFilter extends HttpFilter {
 
     @Override
-    protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilter(HttpServletRequest request, HttpServletResponse response,
+                            FilterChain chain) throws IOException, ServletException {
         var session = request.getSession();
         addUserToSession(session, request);
         chain.doFilter(request, response);
@@ -28,10 +29,9 @@ public class SessionFilter extends HttpFilter {
         var user = (User) session.getAttribute("user");
         if (user == null) {
             user = new User();
-            user.setName("Гость");
+            user.setLogin("Guest");
         }
         request.setAttribute("user", user);
     }
 
 }
-*/
