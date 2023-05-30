@@ -21,8 +21,8 @@ public class Subject {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(
             name = "subject_teacher",
-            joinColumns = { @JoinColumn(name = "teacher_id") },
-            inverseJoinColumns = { @JoinColumn(name = "subject_id") }
+            joinColumns = { @JoinColumn(name = "subject_id") },
+            inverseJoinColumns = { @JoinColumn(name = "teacher_id") }
     )
     private Set<Teacher> teachers;
 }

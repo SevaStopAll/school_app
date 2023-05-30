@@ -4,4 +4,4 @@ CREATE TABLE if not exists homework (
     lesson_id int references lesson(id),
     subject_id int references subject(id),
     school_class_id int references school_class(id)
-)
+);

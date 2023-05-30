@@ -6,4 +6,4 @@ create table if not exists users(
     login varchar(255),
     password varchar(255),
     confirmed boolean not null
-)
+);

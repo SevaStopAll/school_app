@@ -34,13 +34,4 @@ public class ClassDay {
     @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClass;
 
-    public String getLessons() {
-        StringBuilder builder = new StringBuilder();
-        int i = 1;
-        for (Lesson lesson : lessons) {
-            builder.append(i++ + ".  ");
-            builder.append(lesson.getName() + " ");
-        }
-        return builder.toString();
-    }
 }
