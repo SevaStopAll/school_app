@@ -5,15 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Transient
+    @ManyToMany(mappedBy = "role")
+    private Set<User> users;
+
 }

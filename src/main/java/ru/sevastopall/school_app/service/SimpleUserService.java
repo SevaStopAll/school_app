@@ -1,26 +1,34 @@
-/*
-package ru.sevastopall.school_app;
+package ru.sevastopall.school_app.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.sevastopall.school_app.domain.User;
+import ru.sevastopall.school_app.repository.UserRepository;
 
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SimpleUserService implements UserService {
-    private final UserRepository userRepository;
+    private final UserRepository users;
 
-    public SimpleUserService(UserRepository sql2oUserRepository) {
-        this.userRepository = sql2oUserRepository;
+    @Override
+    public Optional<User> findUserByLoginAndPassword(String login, String password) {
+        return users.findUserByLoginAndPassword(login, password);
     }
 
     @Override
-    public Optional<User> save(User user) {
-        return userRepository.save(user);
+    public Optional<User> findByLogin(String login) {
+        return users.findByLogin(login);
     }
 
     @Override
-    public Optional<User> findByEmailAndPassword(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+    public Optional<User> findById(int userId) {
+        return users.findById(userId);
+    }
+
+    @Override
+    public Optional<User> create(User user) {
+        return Optional.of(users.save(user));
     }
 }
-*/

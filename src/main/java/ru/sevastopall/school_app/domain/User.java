@@ -1,72 +1,39 @@
 
 package ru.sevastopall.school_app.domain;
 
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+
+@Entity
+@Table(name="users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    private String firstName;
+    private String lastName;
     private String email;
-    private String name;
+    private String login;
     private String password;
-    private Role role;
+    private boolean confirmed;
 
-    public User(int id, String email, String name, String password) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
 
-    public User() { }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return id == user.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
-

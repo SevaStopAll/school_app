@@ -1,40 +1,56 @@
-/*
 package ru.sevastopall.school_app.controller;
 
+
+import lombok.AllArgsConstructor;
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sevastopall.school_app.UserService;
+import ru.sevastopall.school_app.domain.Role;
+import ru.sevastopall.school_app.domain.User;
+import ru.sevastopall.school_app.service.SimpleRoleService;
+import ru.sevastopall.school_app.service.SimpleUserService;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
+@AllArgsConstructor
+@ThreadSafe
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final SimpleUserService userService;
+    private final SimpleRoleService roles;
 
     @GetMapping("/register")
-    public String getRegistrationPage(Model model) {
-        return "/users/register";
+    public String getRegistationPage(Model model) {
+        model.addAttribute("roles", roles.findAll());
+        return "users/register";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user) {
-        var savedUser = userService.save(user);
-        if (savedUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "errors/404";
+    public String register(Model model, @ModelAttribute User user, String[] roleId) {
+        user.setConfirmed(false);
+        List<Role> roleSet = new ArrayList<>();
+        for (String id : roleId) {
+            roleSet.add(roles.findById(Integer.parseInt(id)).get());
         }
-        return "redirect:/index";
+        user.setRoles(roleSet);
+        var savedUser = userService.create(user);
+        if (savedUser == null) {
+            model.addAttribute("message", "Ошибка регистрации. Логин занят.");
+            return "error/404";
+        }
+        return "redirect:users/login";
     }
 
     @GetMapping("/login")
@@ -44,14 +60,15 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
-        var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        var userOptional = userService
+                .findUserByLoginAndPassword(user.getLogin(), user.getPassword());
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
-            return "users/login";
+            return "error/404";
         }
         var session = request.getSession();
         session.setAttribute("user", userOptional.get());
-        return "redirect:/vacancies";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
@@ -60,4 +77,5 @@ public class UserController {
         return "redirect:/users/login";
     }
 }
-*/
+
+
