@@ -8,18 +8,19 @@
     <include file="db/scripts/001_ddl_create_score_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/002_dml_insert_score_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/003_ddl_create_school_class_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/004_ddl_create_subject_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/005_ddl_create_teacher_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/006_ddl_create_student_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/007_ddl_create_subject_teacher_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/008_ddl_create_lesson_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/009_ddl_create_homework_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/010_ddl_create_mark_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/011_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/012_ddl_create_class_day_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/013_ddl_create_class_day_lesson_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/014_ddl_create_role_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/015_ddl_create_user_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/016_ddl_create_user_role_table.sql" relativeToChangelogFile="true"/>
-    <include file="db/scripts/017_dml_insert_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/004_ddl_create_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/005_dml_insert_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/006_ddl_create_user_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/007_ddl_create_user_role_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/008_ddl_create_teacher_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/009_ddl_create_subject_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/010_ddl_create_subject_teacher_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/011_ddl_create_student_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/012_ddl_create_lesson_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/013_ddl_create_homework_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/014_ddl_create_mark_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/015_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/016_ddl_create_class_day_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/017_ddl_create_class_day_lesson_table.sql" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

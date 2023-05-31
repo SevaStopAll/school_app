@@ -39,6 +39,7 @@
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/day/list}">Посмотреть список учебных дней</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/class/create}">Добавить расписание для класса</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/class/list}">Посмотреть расписание всех классов</a></li>
+                                <li><a class="dropdown-item" th:href="@{/users/list}">Список пользователей</a></li>
                             </ul>
                             </ul>
                         </div>
@@ -68,7 +69,8 @@
                         </div>
                     </div>
                 <div class="d-flex" th:if="${user.login == 'Гость'}">
-                    <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация</a>
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация сотрудника</a>
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/studentRegister}">Регистрация ученика</a>
                     <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
                 </div>
                 <div class="d-flex" th:if="${user.login != 'Гость'}">
@@ -81,7 +83,7 @@
     <div class="container mt-2">
         <h3>Умное школьное приложение</h3>
         <p>Привет! Данное приложение в стадии разработки. Мои текущие планы: </p>
-        <p>Разделение ролей в приложении: ученик, учитель, администратор</p>
+        <p>Подтверждение заявок пользователей</p>
         <p> Корректный вывод расписания уроков </p>
     </div>
 </div>

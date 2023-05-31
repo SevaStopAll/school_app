@@ -16,4 +16,8 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

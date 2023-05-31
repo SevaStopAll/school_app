@@ -10,17 +10,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sevastopall.school_app.domain.Role;
+import ru.sevastopall.school_app.domain.Student;
+import ru.sevastopall.school_app.domain.Teacher;
 import ru.sevastopall.school_app.domain.User;
-import ru.sevastopall.school_app.service.SimpleRoleService;
-import ru.sevastopall.school_app.service.SimpleUserService;
+import ru.sevastopall.school_app.service.*;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/users")
@@ -30,15 +28,20 @@ public class UserController {
 
     private final SimpleUserService userService;
     private final SimpleRoleService roles;
+    private TeacherService teachers;
+    private StudentService students;
+
+    private SchoolClassService classes;
 
     @GetMapping("/register")
     public String getRegistationPage(Model model) {
         model.addAttribute("roles", roles.findAll());
+        model.addAttribute("classes", classes.findAll());
         return "users/register";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user, String[] roleId) {
+    public String register(Model model, @ModelAttribute User user, String[] roleId, String classId) {
         user.setConfirmed(false);
         List<Role> roleSet = new ArrayList<>();
         for (String id : roleId) {
@@ -46,11 +49,31 @@ public class UserController {
         }
         user.setRoles(roleSet);
         var savedUser = userService.create(user);
+        if (user.getRoles().get(0).getName().equals("Teacher")) {
+            teacherRegister(user);
+        } else if (user.getRoles().get(0).getName().equals("Student")) {
+            studentRegister(user, classId);
+        }
         if (savedUser == null) {
             model.addAttribute("message", "Ошибка регистрации. Логин занят.");
             return "error/404";
         }
         return "redirect:users/login";
+    }
+
+    public Optional<Student> studentRegister(User user, String classId) {
+        Student student = new Student();
+        student.setName(user.getFirstName());
+        student.setUser(user);
+        student.setSchoolClass(classes.findById(Integer.parseInt(classId)).get());
+        return students.save(student);
+    }
+
+    public Optional<Teacher> teacherRegister(User user) {
+        Teacher teacher = new Teacher();
+        teacher.setName(user.getFirstName());
+        teacher.setUser(user);
+        return teachers.save(teacher);
     }
 
     @GetMapping("/login")
@@ -76,6 +99,13 @@ public class UserController {
         session.invalidate();
         return "redirect:/users/login";
     }
+
+    @GetMapping("/list")
+    public String getTeachers(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "admin/list";
+    }
+
 }
 
 

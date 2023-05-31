@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.sevastopall.school_app.domain.User;
 import ru.sevastopall.school_app.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,9 @@ public class SimpleUserService implements UserService {
     @Override
     public Optional<User> create(User user) {
         return Optional.of(users.save(user));
+    }
+    @Override
+    public List<User> findAll() {
+        return users.findAll();
     }
 }
