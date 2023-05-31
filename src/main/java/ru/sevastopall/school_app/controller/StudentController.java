@@ -20,7 +20,6 @@ public class StudentController {
     private HomeworkService homeworks;
     private MarkService marks;
     private SchoolClassService classes;
-    private StudentService students;
 
     @GetMapping("/homework")
     public String getHomework(Model model) {

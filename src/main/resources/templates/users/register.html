@@ -61,8 +61,17 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="schoolClass">Класс</label>
+                            <select class="form-control" id="schoolClass"  name="classId">
+                                <option th:each="schoolClass: ${classes}"
+                                        th:text="${schoolClass.name}"
+                                        th:value="${schoolClass.id}"></option>
+                            </select>
+                        </div>
+
                         <div class="form-group row justify-content-center">Если Вы зарегистрированы :
-                            <a th:href="@{/user/loginPage}" class="link" role="button"
+                            <a th:href="@{/users/login}" class="link" role="button"
                                aria-pressed="true">Log in</a>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
