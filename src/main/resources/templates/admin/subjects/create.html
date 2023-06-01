@@ -56,7 +56,7 @@
                 <label for="teacher.id" name="teachersIds">Учителя</label>
                 <select class="form-control" id="teacher.id" name="teachersIds" multiple>
                     <option th:each="teacher: ${teachers}"
-                            th:text="${teacher.name}"
+                            th:text="${teacher.lastName}"
                             th:value="${teacher.id}"></option>
                 </select>
             </div>

@@ -30,7 +30,6 @@ public class UserController {
     private final SimpleRoleService roles;
     private TeacherService teachers;
     private StudentService students;
-
     private SchoolClassService classes;
 
     @GetMapping("/register")
@@ -63,7 +62,8 @@ public class UserController {
 
     public Optional<Student> studentRegister(User user, String classId) {
         Student student = new Student();
-        student.setName(user.getFirstName());
+        student.setFirstName(user.getFirstName());
+        student.setLastName(user.getLastName());
         student.setUser(user);
         student.setSchoolClass(classes.findById(Integer.parseInt(classId)).get());
         return students.save(student);
@@ -71,7 +71,8 @@ public class UserController {
 
     public Optional<Teacher> teacherRegister(User user) {
         Teacher teacher = new Teacher();
-        teacher.setName(user.getFirstName());
+        teacher.setFirstName(user.getFirstName());
+        teacher.setLastName(user.getLastName());
         teacher.setUser(user);
         return teachers.save(teacher);
     }

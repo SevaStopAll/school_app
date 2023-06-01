@@ -3,7 +3,7 @@ create table if not exists users(
     first_name varchar(255),
     last_name varchar(255),
     email varchar(255),
-    login varchar(255),
+    login varchar(255) UNIQUE,
     password varchar(255),
     confirmed boolean not null
 );

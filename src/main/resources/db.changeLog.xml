@@ -22,5 +22,6 @@
     <include file="db/scripts/015_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/016_ddl_create_class_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/017_ddl_create_class_day_lesson_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/018_dml_insert_school_day_table.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

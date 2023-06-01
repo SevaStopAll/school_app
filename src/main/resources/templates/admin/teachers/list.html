@@ -52,14 +52,15 @@
                 <thead>
                 <tr>
                     <th><i class="bi bi-square"></i></th>
-                    <th scope="col">#</th>
                     <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="teacher: ${teachers}">
                     <td th:text="${teacher.id}" />
-                    <td><a th:text="${teacher.name}"></a></td>
+                    <td><a th:text="${teacher.firstName}"></a></td>
+                    <td><a th:text="${teacher.lastName}"></a></td>
                 </tr>
                 </tbody>
             </table>
