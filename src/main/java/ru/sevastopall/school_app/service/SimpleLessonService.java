@@ -45,4 +45,8 @@ public class SimpleLessonService implements LessonService {
     public Set<Lesson> findAll() {
         return lessons.findAll();
     }
+    @Override
+    public Set<Lesson> findByNumber(int number) {
+        return lessons.findByNumber(number);
+    };
 }
