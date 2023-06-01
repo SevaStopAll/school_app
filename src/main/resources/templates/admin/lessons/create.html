@@ -75,7 +75,7 @@
                 <label for="teacher">Учитель</label>
                 <select class="form-control" id="teacher"  name="teacher">
                     <option th:each="teacher: ${teachers}"
-                            th:text="${teacher.name}"
+                            th:text="${teacher.lastName}"
                             th:value="${teacher.id}"></option>
                 </select>
             </div>
