@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Entity
@@ -34,4 +35,11 @@ public class ClassDay {
     @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClass;
 
+    public Lesson findLessonByNumber(int number) {
+        Optional<Lesson> result = lessons.stream().filter(l -> l.getNumber() == number).findFirst();
+        if (result.isPresent()) {
+            return result.get();
+        }
+        return new Lesson("Нет урока");
+    }
 }

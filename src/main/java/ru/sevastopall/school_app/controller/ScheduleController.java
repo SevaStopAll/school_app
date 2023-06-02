@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sevastopall.school_app.domain.ClassDay;
+import ru.sevastopall.school_app.domain.Lesson;
 import ru.sevastopall.school_app.domain.SchoolDay;
 import ru.sevastopall.school_app.service.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -50,10 +52,12 @@ public class ScheduleController {
 
     @PostMapping("/schedule/class/create")
     public String saveClassDay(@ModelAttribute ClassDay classday, String lesson1,
-                               String lesson2, String lesson3) {
-        classday.setLessons(List.of(lessons.findById(Integer.parseInt(lesson1)).get(),
-                lessons.findById(Integer.parseInt(lesson2)).get(),
-                lessons.findById(Integer.parseInt(lesson3)).get()));
+                               String lesson2, String lesson3, String lesson4, String lesson5, String lesson6,
+                               String lesson7, String lesson8) {
+        List<String> les = List.of(lesson1, lesson2, lesson3, lesson4, lesson5, lesson6, lesson7, lesson8);
+        List<Lesson> list = new ArrayList<>();
+        les.stream().filter(l -> !l.equals("Нет урока")).forEach(l -> list.add(lessons.findById(Integer.parseInt(l)).get()));
+        classday.setLessons(list);
         classDays.save(classday);
         return "redirect:/";
     }

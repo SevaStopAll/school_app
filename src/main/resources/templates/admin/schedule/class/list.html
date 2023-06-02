@@ -54,7 +54,14 @@
                     <th scope="col">#</th>
                     <th scope="col">День недели</th>
                     <th scope="col">Класс</th>
-                    <th scope="col">Уроки</th>
+                    <th scope="col">1 Урок</th>
+                    <th scope="col">2 Урок</th>
+                    <th scope="col">3 Урок</th>
+                    <th scope="col">4 Урок</th>
+                    <th scope="col">5 Урок</th>
+                    <th scope="col">6 Урок</th>
+                    <th scope="col">7 Урок</th>
+                    <th scope="col">8 Урок</th>
 
                 </tr>
                 </thead>
@@ -63,7 +70,14 @@
                     <td th:text="${classDay.id}" />
                     <td th:text="${classDay.schoolDay.name}" />
                     <td th:text="${classDay.schoolClass.name}" />
-                <td th:each="lesson: ${classDay.lessons} " th:text="${lesson.name}" />
+                    <td th:text="${classDay.findLessonByNumber(1).name}" />
+                    <td th:text="${classDay.findLessonByNumber(2).name}" />
+                    <td th:text="${classDay.findLessonByNumber(3).name}" />
+                    <td th:text="${classDay.findLessonByNumber(4).name}" />
+                    <td th:text="${classDay.findLessonByNumber(5).name}" />
+                    <td th:text="${classDay.findLessonByNumber(6).name}" />
+                    <td th:text="${classDay.findLessonByNumber(7).name}" />
+                    <td th:text="${classDay.findLessonByNumber(8).name}" />
                 </tr>
                 </tbody>
             </table>

@@ -69,7 +69,8 @@ public class TeacherLessonController {
     }
 
     @PostMapping("/lessons/create")
-    public String saveLesson(@ModelAttribute Lesson lesson) {
+    public String saveLesson(@ModelAttribute Lesson lesson, String number) {
+        lesson.setNumber(Integer.parseInt(number));
         lessons.save(lesson);
         return "redirect:/";
     }

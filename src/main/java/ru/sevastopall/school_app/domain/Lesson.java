@@ -16,7 +16,7 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(name = "lesson_date")
     private LocalDate lessonDate;
 
     private int number;
@@ -34,4 +34,8 @@ public class Lesson {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
+
+    public Lesson(String name) {
+        this.name = name;
+    }
 }

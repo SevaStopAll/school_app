@@ -67,6 +67,7 @@ CREATE TABLE if not exists subject_teacher(
 
 create table if not exists lesson(
     id serial primary key,
+    lesson_date date,
     number int,
     name varchar(256) UNIQUE,
     subject_id int references subject(id),
