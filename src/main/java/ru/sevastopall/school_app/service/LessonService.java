@@ -20,4 +20,6 @@ public interface LessonService {
     Set<Lesson> findByTeacher(Teacher teacher);
 
     Set<Lesson> findAll();
+
+    Set<Lesson> findByNumber(int number);
 }

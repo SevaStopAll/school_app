@@ -17,6 +17,8 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer> {
 
     Set<Lesson> findAll();
 
+    Set<Lesson> findByNumber(int number);
+
     Set<Lesson> findBySubject(Subject subject);
 
     Set<Lesson> findBySchoolClass(SchoolClass schoolClass);
