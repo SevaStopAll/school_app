@@ -91,27 +91,29 @@ create table if not exists mark (
     teacher_id int references teacher(id)
 );
 
+create table if not exists school_week(
+    id serial primary key,
+    start_day date,
+    end_day date
+);
+
 create table if not exists school_day (
      id serial primary key,
-     name varchar(256) UNIQUE
+     name varchar(256) UNIQUE,
+     school_day_date date,
+     week_id int references school_week(id)
  );
 
- create table if not exists class_day (
-     id serial primary key,
-     name varchar(256) UNIQUE,
-     school_class_id int references school_class(id),
-     school_day_id int references school_day(id)
- );
+create table if not exists class_day (
+    id serial primary key,
+    name varchar(256) UNIQUE,
+    class_day_date date,
+    school_class_id int references school_class(id),
+    school_day_id int references school_day(id)
+);
 
  create table if not exists class_day_lesson (
      id serial primary key,
      class_day_id int references class_day(id),
      lesson_id int references lesson(id)
  );
-
- insert into school_day(name) values('Monday') ON CONFLICT DO NOTHING;
- insert into school_day(name) values('Tuesday') ON CONFLICT DO NOTHING;
- insert into school_day(name) values('Wednesday') ON CONFLICT DO NOTHING;
- insert into school_day(name) values('Thursday') ON CONFLICT DO NOTHING;
- insert into school_day(name) values('Friday') ON CONFLICT DO NOTHING;
- insert into school_day(name) values('Saturday') ON CONFLICT DO NOTHING;

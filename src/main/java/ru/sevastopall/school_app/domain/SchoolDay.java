@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -16,5 +17,10 @@ public class SchoolDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Column(name = "school_day_date")
+    private Date date;
+    @ManyToOne
+    @JoinColumn(name = "week_id")
+    private SchoolWeek week;
 
 }
