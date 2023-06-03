@@ -64,14 +64,212 @@
 
             <div class="form-group">
                 <label for="schoolClass.id">Класс</label>
-                <select class="form-control" id="schoolClass.id"  name="schoolClass">
+                <select class="form-control" id="schoolClass.id"  name="schoolClass1">
                     <option th:each="schoolClass: ${schoolClasses}"
                             th:text="${schoolClass.name}"
                             th:value="${schoolClass.id}"></option>
                 </select>
             </div>
 
+            <div class="mb-3">
+                <label for="lessonDate1" class="form-label"><b>Дата учебного дня</b></label>
+                <input type="text" class="form-control" id="lessonDate1" name="lessonDate1" placeholder="Введите день">
+                <input type="text" class="form-control" id="lessonDate2" name="lessonDate1" placeholder="Введите месяц">
+                <input type="text" class="form-control" id="lessonDate3" name="lessonDate1" placeholder="Введите год">
+            </div>
+
+            <div class="mb-3">
+                <label for="number1" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number1" name="number1" placeholder="Введите номер урока, например, 1">
+            </div>
+
             <div class="form-group">
+                <label for="subject1">1 урок</label>
+                <select class="form-control" id="subject1"  name="subject1">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="teacher1">Учитель</label>
+                <select class="form-control" id="teacher1"  name="teacher1">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="number2" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number2" name="number2" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject2">2 урок</label>
+                <select class="form-control" id="subject2"  name="subject2">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="teacher2">Учитель</label>
+                <select class="form-control" id="teacher2"  name="teacher2">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="number3" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number3" name="number3" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject3">3 Урок</label>
+                <select class="form-control" id="subject3"  name="subject3">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="teacher3">Учитель</label>
+                <select class="form-control" id="teacher3"  name="teacher3">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="number4" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number4" name="number4" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject4">4 урок</label>
+                <select class="form-control" id="subject4"  name="subject4">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="teacher4">Учитель</label>
+                <select class="form-control" id="teacher4"  name="teacher4">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="number5" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number5" name="number5" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject5">5 урок</label>
+                <select class="form-control" id="subject5"  name="subject5">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="teacher5">Учитель</label>
+                <select class="form-control" id="teacher5"  name="teacher5">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="number6" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number6" name="number6" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject6">6 Урок</label>
+                <select class="form-control" id="subject6"  name="subject6">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="teacher6">Учитель</label>
+                <select class="form-control" id="teacher6"  name="teacher6">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="number7" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number7" name="number7" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject7">7 Урок</label>
+                <select class="form-control" id="subject7"  name="subject7">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="teacher7">Учитель</label>
+                <select class="form-control" id="teacher7"  name="teacher7">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="number8" class="form-label"><b>Номер урока</b></label>
+                <input type="text" class="form-control" id="number8" name="number8" placeholder="Введите номер урока, например, 1">
+            </div>
+
+            <div class="form-group">
+                <label for="subject8">8 Урок</label>
+                <select class="form-control" id="subject8"  name="subject8">
+                    <option th:each="subject: ${subjects}"
+                            th:text="${subject.name}"
+                            th:value="${subject.id}"></option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="teacher8">Учитель</label>
+                <select class="form-control" id="teacher8"  name="teacher8">
+                    <option th:each="teacher: ${teachers}"
+                            th:text="${teacher.lastName}"
+                            th:value="${teacher.id}"></option>
+                </select>
+            </div>
+
+            <!--<div class="form-group">
                 <label for="lesson1.id" name="lesson1">Уроки</label>
                 <select class="form-control" id="lesson1.id" name="lesson1">
                     <option selected>Нет урока</option>
@@ -149,7 +347,7 @@
                             th:text="${lesson.name}"
                             th:value="${lesson.id}"></option>
                 </select>
-            </div>
+            </div>-->
 
             <div class="mb-3 row">
                 <div class="col-6"></div>
