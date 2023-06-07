@@ -13,9 +13,7 @@ import ru.sevastopall.school_app.service.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,11 +31,15 @@ public class ScheduleController {
 
     @GetMapping("/schedule/day/create")
     public String getDayCreationPage(Model model) {
+        model.addAttribute("weeks", weeks.findAll());
         return "admin//schedule/day/create";
     }
 
     @PostMapping("/schedule/day/create")
-    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay) {
+    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay, String startDate1, String startDate2, String startDate3) {
+        schoolDay.setDate(LocalDate.of(
+                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
+        ));
         days.save(schoolDay);
         return "redirect:/";
     }
@@ -119,21 +121,20 @@ public class ScheduleController {
         return lessons.save(lesson).get();
     }
 
-
     @GetMapping("/schedule/week/create")
     public String getWeekCreationPage() {
         return "admin/schedule/week/create";
     }
 
-    @PostMapping("/schedule/class/create")
-    public String saveClassDay(@ModelAttribute SchoolWeek schoolWeek,
+    @PostMapping("/schedule/week/create")
+    public String saveSchoolWeek(@ModelAttribute SchoolWeek schoolWeek,
                                String startDate1, String startDate2, String startDate3,
                                String endDate1, String endDate2, String endDate3) {
         schoolWeek.setStartDay(LocalDate.of(
-                Integer.parseInt(startDate1), Integer.parseInt(startDate2), Integer.parseInt(startDate3)
+                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
         ));
         schoolWeek.setEndDay(LocalDate.of(
-                Integer.parseInt(endDate1), Integer.parseInt(endDate2), Integer.parseInt(endDate3)
+                Integer.parseInt(endDate3), Integer.parseInt(endDate2), Integer.parseInt(endDate1)
         ));
         weeks.save(schoolWeek);
         return "redirect:/";

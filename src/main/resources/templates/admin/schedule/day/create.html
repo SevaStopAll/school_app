@@ -52,15 +52,14 @@
                 <label for="name" class="form-label"><b>Имя</b></label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Введите название">
             </div>
-            <div class="mb-3">
-                <label for="date" class="form-label"><b>Имя</b></label>
-                <input type="text" class="form-control" id="date" name="date" placeholder="Введите дату">
-            </div>
+            <input type="text" class="form-control" id="StartDate1" name="startDate1" placeholder="Введите день">
+            <input type="text" class="form-control" id="StartDate2" name="startDate2" placeholder="Введите месяц">
+            <input type="text" class="form-control" id="StartDate3" name="startDate3" placeholder="Введите год">
             <div class="form-group">
                 <label for="weekId">Неделя</label>
                 <select class="form-control" id="weekId"  name="weekId">
                     <option th:each="week: ${weeks}"
-                            th:text="${week.name}"
+                            th:text="${week.startDay}"
                             th:value="${week.id}"></option>
                 </select>
             </div>

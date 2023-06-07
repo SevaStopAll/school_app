@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -18,7 +19,7 @@ public class SchoolDay {
     private int id;
     private String name;
     @Column(name = "school_day_date")
-    private Date date;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "week_id")
     private SchoolWeek week;

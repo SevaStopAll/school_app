@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @Entity
@@ -19,6 +18,6 @@ public class SchoolWeek {
     int id;
     @Column(name = "start_day")
     LocalDate startDay;
-    @Column(name = "start_end")
+    @Column(name = "end_day")
     LocalDate endDay;
 }
