@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
@@ -111,6 +108,18 @@ public class ScheduleController {
     public String getClassDays(Model model) {
         model.addAttribute("classDays", classDays.findAll());
         return "admin/schedule/class/list";
+    }
+
+    @GetMapping("/{id}")
+    public String getById(Model model, @PathVariable int id) {
+        var vacancyOptional = vacancyService.findById(id);
+        if (vacancyOptional.isEmpty()) {
+            model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
+            return "errors/404";
+        }
+        model.addAttribute("cities", cityService.findAll());
+        model.addAttribute("vacancy", vacancyOptional.get());
+        return "vacancies/one";
     }
 
     private Lesson createNewLesson(LocalDate lessonDate, String schoolClass, String number, String subject, String teacher) {
