@@ -72,32 +72,37 @@ public class ScheduleController {
                                String number7, String subject7, String teacher7,
                                String number8, String subject8, String teacher8) {
         List<Lesson> lessonSet = new ArrayList<>();
-
+        LocalDate lessonDate = LocalDate.of(
+                Integer.parseInt(lessonDate3), Integer.parseInt(lessonDate2), Integer.parseInt(lessonDate1)
+        );
+        classday.setDate(lessonDate);
         if (!number1.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number1, subject1, teacher1));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number1, subject1, teacher1));
         }
         if (!number2.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number2, subject2, teacher2));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number2, subject2, teacher2));
         }
         if (!number3.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number3, subject3, teacher3));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number3, subject3, teacher3));
         }
         if (!number4.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number4, subject4, teacher4));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number4, subject4, teacher4));
         }
         if (!number5.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number5, subject5, teacher5));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number5, subject5, teacher5));
         }
         if (!number6.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number6, subject6, teacher6));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number6, subject6, teacher6));
         }
         if (!number7.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number7, subject7, teacher7));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number7, subject7, teacher7));
         }
         if (!number8.equals("0")) {
-            lessonSet.add(createNewLesson(lessonDate1, lessonDate2, lessonDate3, schoolClass1, number8, subject8, teacher8));
+            lessonSet.add(createNewLesson(lessonDate, schoolClass1, number8, subject8, teacher8));
         }
         classday.setLessons(lessonSet);
+
+        classday.setSchoolClass(classes.findById(Integer.parseInt(schoolClass1)).get());
         classDays.save(classday);
         return "redirect:/";
     }
@@ -108,16 +113,14 @@ public class ScheduleController {
         return "admin/schedule/class/list";
     }
 
-    private Lesson createNewLesson(String lessonDate1, String lessonDate2, String lessonDate3, String schoolClass, String number, String subject, String teacher) {
+    private Lesson createNewLesson(LocalDate lessonDate, String schoolClass, String number, String subject, String teacher) {
         Lesson lesson = new Lesson();
-        lesson.setLessonDate(LocalDate.of(
-                Integer.parseInt(lessonDate1), Integer.parseInt(lessonDate2), Integer.parseInt(lessonDate3)
-        ));
+        lesson.setLessonDate(lessonDate);
         lesson.setNumber(Integer.parseInt(number));
         lesson.setSubject(subjects.findById(Integer.parseInt(subject)).get());
         lesson.setSchoolClass(classes.findById(Integer.parseInt(schoolClass)).get());
         lesson.setTeacher(teachers.findById(Integer.parseInt(teacher)).get());
-        lesson.setName(lesson.getSchoolClass().getName() + lesson.getNumber());
+        lesson.setName(lesson.getLessonDate() + lesson.getSchoolClass().getName() + lesson.getNumber() + lesson.getSubject().getName());
         return lessons.save(lesson).get();
     }
 

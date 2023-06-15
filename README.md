@@ -23,6 +23,15 @@ Launch Main.class /src/main/java/ru.sevastopall.school_app
 - **Maven 3.8**
 - **PostgresSQL 14**
 
+### Скриншоты:
+
+Окно расписания
+![](src//main/resources/static/ClassesSchedule.png)
+
+Добавление учебного дня для класса
+![](src/main/resources/static/createClassDay.png)
+
+
 ### Текущие задачи:
     Создать расписание как Java сущность, создать корректное его представление в браузере. 
     
