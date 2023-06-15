@@ -15,6 +15,8 @@ public class Homework {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "description")
     private String description;
 
     @ManyToOne

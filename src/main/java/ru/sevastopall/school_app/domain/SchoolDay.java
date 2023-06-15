@@ -17,6 +17,7 @@ public class SchoolDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
     @Column(name = "school_day_date")
     private LocalDate date;

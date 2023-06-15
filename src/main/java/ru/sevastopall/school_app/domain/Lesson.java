@@ -16,11 +16,13 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "lesson_date")
     private LocalDate lessonDate;
 
+    @Column(name = "number")
     private int number;
-
+    @Column(name = "name")
     private String name;
 
     @ManyToOne
