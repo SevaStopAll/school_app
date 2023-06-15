@@ -1,5 +1,6 @@
 package ru.sevastopall.school_app.service;
 
+import ru.sevastopall.school_app.domain.SchoolClass;
 import ru.sevastopall.school_app.domain.Student;
 
 import java.util.Optional;
@@ -12,5 +13,7 @@ public interface StudentService {
     Optional<Student> findById(int id);
 
     Set<Student> findAll();
+
+    Set<Student> findBySchoolClass(SchoolClass schoolClass);
 
 }
