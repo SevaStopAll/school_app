@@ -98,7 +98,6 @@ public class ScheduleController {
             lessonSet.add(createNewLesson(lessonDate, schoolClass1, number8, subject8, teacher8));
         }
         classday.setLessons(lessonSet);
-
         classday.setSchoolClass(classes.findById(Integer.parseInt(schoolClass1)).get());
         classDays.save(classday);
         return "redirect:/";
@@ -108,18 +107,6 @@ public class ScheduleController {
     public String getClassDays(Model model) {
         model.addAttribute("classDays", classDays.findAll());
         return "admin/schedule/class/list";
-    }
-
-    @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable int id) {
-        var vacancyOptional = vacancyService.findById(id);
-        if (vacancyOptional.isEmpty()) {
-            model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
-            return "errors/404";
-        }
-        model.addAttribute("cities", cityService.findAll());
-        model.addAttribute("vacancy", vacancyOptional.get());
-        return "vacancies/one";
     }
 
     private Lesson createNewLesson(LocalDate lessonDate, String schoolClass, String number, String subject, String teacher) {

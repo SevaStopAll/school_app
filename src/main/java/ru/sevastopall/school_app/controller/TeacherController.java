@@ -3,10 +3,7 @@ package ru.sevastopall.school_app.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.Homework;
 import ru.sevastopall.school_app.domain.Mark;
 import ru.sevastopall.school_app.service.*;
@@ -53,5 +50,15 @@ public class TeacherController {
     public String save(@ModelAttribute Mark mark) {
         marks.save(mark);
         return "redirect:/";
+    }
+
+    @PostMapping("/mark/new")
+    public String saveMark(@ModelAttribute Mark mark, String student, String subject, String teacher, String scoreId) {
+        mark.setScore(score.findById(Integer.parseInt(scoreId)).get());
+        mark.setStudent(students.findById(Integer.parseInt(student)).get());
+        mark.setTeacher(teachers.findById(Integer.parseInt(subject)).get());
+        mark.setSubject(subjects.findById(Integer.parseInt(teacher)).get());
+        marks.save(mark);
+        return "Done";
     }
 }

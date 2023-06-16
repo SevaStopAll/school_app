@@ -47,29 +47,54 @@
         </div>
     </nav>
     <div class="container">
-        <form class="mt-3" th:action="@{/admin/lessons/update}" method="post" th:object="${lesson}" enctype="multipart/form-data">
-            <input type="hidden" name="id" th:field="*{id}">
-            <div class="container">
+        <form class="mt-3" th:action="@{http://localhost:8080/teacher/mark/new}" method="post" th:object="${mark}" enctype="multipart/form-data">
 
+            <div class="container">
                 <p class="text-center">Идентификатор: <td th:text="${lesson.id}" /></p>
                 <p class="text-center">Предмет: <td><a th:text="${lesson.subject.name}"></a></td></p>
                 <p class="text-center">Учитель: <td th:text="${lesson.teacher.firstName + lesson.teacher.lastName}" /></p>
                 <p class="text-center">Дата урока:  <td th:text="${lesson.lessonDate}" /></p>
                 <p class="text-center">Название урока: <td th:text="${lesson.name}" /></p>
                 <p class="text-center">Класс: <td th:text="${lesson.schoolClass.name}" />></p>
-
             </div>
-            <div class="mb-3 row">
-                <div class="col-6"></div>
-                <div class="col-6">
-                    <div class="row">
-                        <!--<div class="col-4"><a class="btn btn-light w-100" th:href="@{/vacancies}">Отмена</a></div>-->
-                        <div class="col-4"><button class="btn btn-success w-100" type="submit">Обновить</button></div>
+
+            <div class="container">
+                <tr th:each="student: ${students}">
+                    <div class="container">
+                        <div class="row g-2">
+                        <div class="col-6">
+                        <td th:text="${student.id}"/>
+                        <td th:text="${student.firstName + student.lastName}"/>
+                        </div>
+                            <div class="col-6">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Оценка
+                        </button>
+                        <ul class="dropdown-menu">
+                            <form class="mt-3" th:action="@{http://localhost:8080/teacher/mark/new}" method="post" th:object="${mark}" enctype="multipart/form-data">
+                                <input type="hidden"
+                                       th:value="${student.id}" id="student" name="student" />
+                                <input type="hidden"
+                                       th:value="${lesson.subject.id}" id="subject" name="subject" />
+                                <input type="hidden"
+                                       th:value="${lesson.teacher.id}" id="teacher" name="teacher" />
+                                        <select class="form-control" id="score.id"  name="scoreId">
+                                            <option th:each="score: ${score}"
+                                                    th:text="${score.description}"
+                                                    th:value="${score.id}"></option>
+                                        </select>
+                                        <button class="btn btn-primary w-100" type="submit">Выставить</button>
+                                </form>
+                        </ul>
+                            </div>
                     </div>
-                </div>
+                    </div>
+                </tr>
             </div>
         </form>
     </div>
+
 </div>
 </body>
 </html>
