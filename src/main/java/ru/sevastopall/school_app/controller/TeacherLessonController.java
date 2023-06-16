@@ -20,6 +20,12 @@ public class TeacherLessonController {
     private SubjectService subjects;
     private LessonService lessons;
 
+    private StudentService students;
+
+    private ScoreService scores;
+
+    private MarkService marks;
+
     @GetMapping("/teachers/create")
     public String getTeachersCreationPage(Model model) {
         return "admin/teachers/create";
@@ -80,6 +86,21 @@ public class TeacherLessonController {
         model.addAttribute("lessons", lessons.findAll());
         return "admin/lessons/list";
     }
+
+    @GetMapping("/lessons/{id}")
+    public String getOneLesson(Model model, @PathVariable int id) {
+        var lessonOptional = lessons.findById(id);
+        if (lessonOptional.isEmpty()) {
+            model.addAttribute("message", "Урока не найдено");
+                return "errors/404";
+        }
+        Lesson lesson = lessonOptional.get();
+        SchoolClass schoolClass = lesson.getSchoolClass();
+        model.addAttribute("lesson", lesson);
+        model.addAttribute("students", students.findBySchoolClass(schoolClass));
+        model.addAttribute("score", scores.findAll());
+        return "admin/lessons/one";
+        }
 
 
 }

@@ -70,7 +70,7 @@
                     <td th:text="${classDay.id}" />
                     <td th:text="${classDay.schoolDay.name}" />
                     <td th:text="${classDay.schoolClass.name}" />
-                    <td><a th:text="${classDay.findLessonByNumber(1).name}" th:href="@{/lessons/{lessonId}(lessonId=${lesson.id})}"></a></td>
+                    <td><a th:text="${classDay.findLessonByNumber(1).name}" th:href="@{/admin/lessons/{lessonId}(lessonId=${classDay.findLessonByNumber(1).id})}"></a></td>
                     <td th:text="${classDay.findLessonByNumber(2).name}" />
                     <td th:text="${classDay.findLessonByNumber(3).name}" />
                     <td th:text="${classDay.findLessonByNumber(4).name}" />
