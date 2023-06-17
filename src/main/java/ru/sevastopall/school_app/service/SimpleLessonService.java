@@ -8,6 +8,8 @@ import ru.sevastopall.school_app.domain.Subject;
 import ru.sevastopall.school_app.domain.Teacher;
 import ru.sevastopall.school_app.repository.LessonRepository;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,4 +51,9 @@ public class SimpleLessonService implements LessonService {
     public Set<Lesson> findByNumber(int number) {
         return lessons.findByNumber(number);
     };
+
+    @Override
+    public Collection<Lesson> findBySchoolClassAndLessonDate(SchoolClass schoolClass, LocalDate date) {
+        return lessons.findBySchoolClassAndLessonDate(schoolClass, date);
+    }
 }

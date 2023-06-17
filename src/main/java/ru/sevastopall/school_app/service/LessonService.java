@@ -5,6 +5,8 @@ import ru.sevastopall.school_app.domain.SchoolClass;
 import ru.sevastopall.school_app.domain.Subject;
 import ru.sevastopall.school_app.domain.Teacher;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,4 +24,6 @@ public interface LessonService {
     Set<Lesson> findAll();
 
     Set<Lesson> findByNumber(int number);
+
+    Collection<Lesson> findBySchoolClassAndLessonDate(SchoolClass schoolClass, LocalDate date);
 }

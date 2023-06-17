@@ -10,6 +10,7 @@ import ru.sevastopall.school_app.service.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -26,6 +27,45 @@ public class ScheduleController {
 
     private SchoolWeekService weeks;
 
+    @GetMapping("/schedule/week/create")
+    public String getWeekCreationPage() {
+        return "admin/schedule/week/create";
+    }
+
+    @PostMapping("/schedule/week/create")
+    public String saveSchoolWeek(@ModelAttribute SchoolWeek schoolWeek,
+                                 String startDate1, String startDate2, String startDate3,
+                                 String endDate1, String endDate2, String endDate3) {
+        schoolWeek.setStartDay(LocalDate.of(
+                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
+        ));
+        schoolWeek.setEndDay(LocalDate.of(
+                Integer.parseInt(endDate3), Integer.parseInt(endDate2), Integer.parseInt(endDate1)
+        ));
+        weeks.save(schoolWeek);
+        return "redirect:/";
+    }
+
+    @GetMapping("/schedule/week/list")
+    public String getWeekList(Model model) {
+        model.addAttribute("schoolWeeks", weeks.findAll());
+        return "admin/schedule/week/list";
+    }
+
+    @GetMapping("/schedule/week/{id}")
+    public String getOneWeek(Model model, @PathVariable int id) {
+        var weekOptional = weeks.findById(id);
+        if (weekOptional.isEmpty()) {
+            model.addAttribute("message", "Урока не найдено");
+            return "errors/404";
+        }
+        SchoolWeek week = weekOptional.get();
+        Collection<SchoolDay> schoolDays = days.findByWeek(week);
+        model.addAttribute("days", schoolDays);
+        return "admin/schedule/week/one";
+    }
+
+
     @GetMapping("/schedule/day/create")
     public String getDayCreationPage(Model model) {
         model.addAttribute("weeks", weeks.findAll());
@@ -33,10 +73,11 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedule/day/create")
-    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay, String startDate1, String startDate2, String startDate3) {
+    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay, String startDate1, String startDate2, String startDate3, String weekId) {
         schoolDay.setDate(LocalDate.of(
                 Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
         ));
+        schoolDay.setWeek(weeks.findById(Integer.parseInt(weekId)).get());
         days.save(schoolDay);
         return "redirect:/";
     }
@@ -45,6 +86,19 @@ public class ScheduleController {
     public String getSchoolDays(Model model) {
         model.addAttribute("schoolDays", days.findAll());
         return "admin/schedule/day/list";
+    }
+
+    @GetMapping("/schedule/day/{id}")
+    public String getOneDay(Model model, @PathVariable int id) {
+        var dayOptional = days.findById(id);
+        if (dayOptional.isEmpty()) {
+            model.addAttribute("message", "Урока не найдено");
+            return "errors/404";
+        }
+        SchoolDay schoolDay = dayOptional.get();
+        Collection<ClassDay> days = classDays.findBySchoolDay(schoolDay);
+        model.addAttribute("days", days);
+        return "admin/schedule/day/one";
     }
 
     @GetMapping("/schedule/class/create")
@@ -109,6 +163,19 @@ public class ScheduleController {
         return "admin/schedule/class/list";
     }
 
+    @GetMapping("/schedule/class/{id}")
+    public String getOneClassDay(Model model, @PathVariable int id) {
+        var classDayOptional = classDays.findById(id);
+        if (classDayOptional.isEmpty()) {
+            model.addAttribute("message", "Урока не найдено");
+            return "errors/404";
+        }
+        ClassDay classDay = classDayOptional.get();
+        Collection<Lesson> classDayLessons = lessons.findBySchoolClassAndLessonDate(classDay.getSchoolClass(), classDay.getDate());
+        model.addAttribute("lessons", classDayLessons);
+        return "admin/schedule/class/one";
+    }
+
     private Lesson createNewLesson(LocalDate lessonDate, String schoolClass, String number, String subject, String teacher) {
         Lesson lesson = new Lesson();
         lesson.setLessonDate(lessonDate);
@@ -118,24 +185,5 @@ public class ScheduleController {
         lesson.setTeacher(teachers.findById(Integer.parseInt(teacher)).get());
         lesson.setName(lesson.getLessonDate() + lesson.getSchoolClass().getName() + lesson.getNumber() + lesson.getSubject().getName());
         return lessons.save(lesson).get();
-    }
-
-    @GetMapping("/schedule/week/create")
-    public String getWeekCreationPage() {
-        return "admin/schedule/week/create";
-    }
-
-    @PostMapping("/schedule/week/create")
-    public String saveSchoolWeek(@ModelAttribute SchoolWeek schoolWeek,
-                               String startDate1, String startDate2, String startDate3,
-                               String endDate1, String endDate2, String endDate3) {
-        schoolWeek.setStartDay(LocalDate.of(
-                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
-        ));
-        schoolWeek.setEndDay(LocalDate.of(
-                Integer.parseInt(endDate3), Integer.parseInt(endDate2), Integer.parseInt(endDate1)
-        ));
-        weeks.save(schoolWeek);
-        return "redirect:/";
     }
 }

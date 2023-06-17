@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import ru.sevastopall.school_app.domain.SchoolDay;
+import ru.sevastopall.school_app.domain.SchoolWeek;
 import ru.sevastopall.school_app.repository.SchoolDayRepository;
 
 import java.util.Collection;
@@ -33,5 +34,10 @@ public class SimpleSchoolDayService implements SchoolDayService {
     @Override
     public Collection<SchoolDay> findAll() {
         return days.findAll();
+    }
+
+    @Override
+    public Collection<SchoolDay> findByWeek(SchoolWeek week) {
+        return days.findByWeek(week);
     }
 }
