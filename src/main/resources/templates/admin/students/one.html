@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
-    <title>Список учеников</title>
+    <title>Список учебных дней</title>
 </head>
 <body>
 <div class="container-fluid p-0">
@@ -47,22 +47,25 @@
         </div>
     </nav>
     <div class="container">
+
+        <p class="fs-1"><a th:text="${student.lastName}"></a>  <a th:text="${student.firstName}"></a> </p>
+        <p class="fs-1"> Средний балл <a th:text="${avgMark}"></a> </p>
+
+        <p class="text-center">Оценки</p>
         <div class="row">
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
-                    <th scope="col">#</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Класс</th>
+                    <th scope="col">Оценка</th>
+                    <th scope="col">Предмет</th>
+                    <th scope="col">Кто выставил</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="student: ${students}">
-                    <td th:text="${student.id}" />
-                    <td><a th:text="${student.firstName}" th:href="@{/admin/students/{studentId}(studentId=${student.id})}"></a></td>
-                    <td><a th:text="${student.lastName}"></a></td>
-                    <td th:text="${student.schoolClass}" />
+                <tr th:each="mark: ${marks}">
+                    <td th:text="${mark.score.id}" />
+                    <td th:text="${mark.subject.name}"></td>
+                    <td th:text="${mark.teacher.lastName}"></td>
                 </tr>
                 </tbody>
             </table>

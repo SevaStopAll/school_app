@@ -56,9 +56,9 @@ public class TeacherController {
     public String saveMark(@ModelAttribute Mark mark, String student, String subject, String teacher, String scoreId) {
         mark.setScore(score.findById(Integer.parseInt(scoreId)).get());
         mark.setStudent(students.findById(Integer.parseInt(student)).get());
-        mark.setTeacher(teachers.findById(Integer.parseInt(subject)).get());
-        mark.setSubject(subjects.findById(Integer.parseInt(teacher)).get());
+        mark.setTeacher(teachers.findById(Integer.parseInt(teacher)).get());
+        mark.setSubject(subjects.findById(Integer.parseInt(subject)).get());
         marks.save(mark);
-        return "Done";
+        return "redirect:/";
     }
 }

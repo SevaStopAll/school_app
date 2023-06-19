@@ -3,14 +3,15 @@ package ru.sevastopall.school_app.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sevastopall.school_app.domain.SchoolClass;
-import ru.sevastopall.school_app.domain.Student;
+import org.springframework.web.bind.annotation.*;
+import ru.sevastopall.school_app.domain.*;
+import ru.sevastopall.school_app.service.MarkService;
 import ru.sevastopall.school_app.service.SchoolClassService;
 import ru.sevastopall.school_app.service.StudentService;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -18,6 +19,8 @@ import ru.sevastopall.school_app.service.StudentService;
 public class ClassesController {
     private SchoolClassService classes;
     private StudentService students;
+
+    private MarkService marks;
 
     @GetMapping("/classes/create")
     public String getClassCreationPage() {
@@ -53,6 +56,21 @@ public class ClassesController {
     public String getStudents(Model model) {
         model.addAttribute("students", students.findAll());
         return "admin/students/list";
+    }
+
+    @GetMapping("/students/{id}")
+    public String getOneStudent(Model model, @PathVariable int id) {
+        var studentOptional = students.findById(id);
+        if (studentOptional.isEmpty()) {
+            model.addAttribute("message", "Ученика не найдено");
+            return "errors/404";
+        }
+        Student student = studentOptional.get();
+        model.addAttribute("student", student);
+        List<Mark> studentMarks = marks.findByStudentId(student.getId());
+        model.addAttribute("marks", studentMarks);
+        model.addAttribute("avgMark", studentMarks.stream().mapToInt(m -> m.getScore().getDescription()).average().orElse(0));
+        return "admin/students/one";
     }
 
 }
