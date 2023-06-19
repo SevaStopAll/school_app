@@ -69,6 +69,23 @@
                 </tr>
                 </tbody>
             </table>
+            <p class="text-center">Группировка по предметам</p>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Предмет</th>
+                    <th scope="col">Оценки</th>
+                </tr>
+                </thead>
+                <tbody>
+            <tr th:each="mark: ${demo}">
+                <td th:text="${mark.key}" />
+                <td th:text="${mark.value}" />
+                </tbody>
+            </tr>
+            </table>
         </div>
     </div>
 </div>

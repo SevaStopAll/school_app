@@ -70,6 +70,7 @@ public class ClassesController {
         List<Mark> studentMarks = marks.findByStudentId(student.getId());
         studentMarks.stream().map(mark -> mark.getSubject().getName()).collect(Collectors.toList());
         model.addAttribute("marks", studentMarks);
+        model.addAttribute("demo", marks.getResults(student));
         model.addAttribute("avgMark", studentMarks.stream().mapToInt(m -> m.getScore().getDescription()).average().orElse(0));
         return "admin/students/one";
     }

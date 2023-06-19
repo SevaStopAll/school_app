@@ -4,6 +4,7 @@ import ru.sevastopall.school_app.domain.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MarkService {
@@ -15,4 +16,6 @@ public interface MarkService {
     List<Mark> findByTeacher(Teacher teacher);
 
     List<Mark> findBySubject(Subject subject);
+
+    Map<String, List<Integer>> getResults(Student student);
 }
