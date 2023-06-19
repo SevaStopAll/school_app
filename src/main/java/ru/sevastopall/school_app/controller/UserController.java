@@ -5,14 +5,8 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sevastopall.school_app.domain.Role;
-import ru.sevastopall.school_app.domain.Student;
-import ru.sevastopall.school_app.domain.Teacher;
-import ru.sevastopall.school_app.domain.User;
+import org.springframework.web.bind.annotation.*;
+import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
 
@@ -104,7 +98,19 @@ public class UserController {
     @GetMapping("/list")
     public String getTeachers(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "admin/list";
+        return "users/list";
+    }
+
+    @GetMapping("/{id}")
+    public String getOneLesson(Model model, @PathVariable int id) {
+        var userOptional = userService.findById(id);
+        if (userOptional.isEmpty()) {
+            model.addAttribute("message", "Пользователя не найдено");
+            return "errors/404";
+        }
+        User user = userOptional.get();
+        model.addAttribute("user", user);
+        return "users/one";
     }
 
 }

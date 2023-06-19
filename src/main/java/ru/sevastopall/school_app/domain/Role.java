@@ -22,4 +22,9 @@ public class Role {
     @ManyToMany(mappedBy = "role")
     private Set<User> users;
 
+    @Override
+    public String toString() {
+        return "Role " +
+                name;
+    }
 }
