@@ -47,8 +47,8 @@
         </div>
     </nav>
     <div class="container">
-
-        <p class="text-center">Пользователь <a th:text="${user.firstName}"></a>  <a th:text="${user.lastName}"></a> </p>
+        <form class="mt-3" th:action="@{/users/update}" method="post" th:object="${currentUser}" enctype="multipart/form-data">
+        <p class="text-center">Пользователь <a th:text="${currentUser.firstName}"></a>  <a th:text="${currentUser.lastName}"></a> </p>
         <div class="row">
             <table class="table">
                 <thead>
@@ -60,13 +60,32 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.login}"></td>
-                    <td th:text="${user.roles}"></td>
-                    <td th:text="${user.confirmed}"></td>
+                    <td th:text="${currentUser.email}"></td>
+                    <td th:text="${currentUser.login}"></td>
+                    <td th:text="${currentUser.roles}"></td>
+                    <td th:text="${currentUser.confirmed}"></td>
                 </tbody>
             </table>
         </div>
+
+        <div th:if="${user.roles.get(0).getName == 'Admin'}">
+            <div class="form-check mb-3">
+                <input type="checkbox" name="visible" class="form-check-input" id="confirmed" th:field="*{confirmed}">
+                <label class="form-check-label" for="confirmed">Подтвердить</label>
+                <input type="hidden"
+                       th:value="${currentUser.firstName}" id="firstName" name="firstName" />
+                <input type="hidden"
+                       th:value="${currentUser.lastName}" id="lastName" name="lastName" />
+                <input type="hidden"
+                       th:value="${currentUser.email}" id="email" name="email" />
+                <input type="hidden"
+                       th:value="${currentUser.login}" id="login" name="login" />
+            </div>
+
+        <div class="col-4">  <button class="btn btn-success w-100" type="submit">Обновить</button>
+        </div>
+        </div>
+        </form>
     </div>
 </div>
 </body>

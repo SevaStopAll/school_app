@@ -6,6 +6,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
@@ -109,10 +110,9 @@ public class UserController {
             return "errors/404";
         }
         User user = userOptional.get();
-        model.addAttribute("user", user);
+        model.addAttribute("currentUser", user);
         return "users/one";
     }
-
 }
 
 
