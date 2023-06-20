@@ -113,6 +113,19 @@ public class UserController {
         model.addAttribute("currentUser", user);
         return "users/one";
     }
+
+    @PostMapping("/update")
+    public String confirmUser(Model model, String id) {
+        var userOptional = userService.findById(Integer.parseInt(id));
+        if (userOptional.isEmpty()) {
+            model.addAttribute("message", "Пользователя не найдено");
+            return "errors/404";
+        }
+        User user = userOptional.get();
+        user.setConfirmed(true);
+        userService.create(user);
+        return "users/list";
+    }
 }
 
 

@@ -73,16 +73,10 @@
                 <input type="checkbox" name="visible" class="form-check-input" id="confirmed" th:field="*{confirmed}">
                 <label class="form-check-label" for="confirmed">Подтвердить</label>
                 <input type="hidden"
-                       th:value="${currentUser.firstName}" id="firstName" name="firstName" />
-                <input type="hidden"
-                       th:value="${currentUser.lastName}" id="lastName" name="lastName" />
-                <input type="hidden"
-                       th:value="${currentUser.email}" id="email" name="email" />
-                <input type="hidden"
-                       th:value="${currentUser.login}" id="login" name="login" />
+                       th:value="${currentUser.id}" id="id" name="id" />
             </div>
 
-        <div class="col-4">  <button class="btn btn-success w-100" type="submit">Обновить</button>
+        <div class="col-4">  <button class="btn btn-success w-100" type="submit">Подтвердить</button>
         </div>
         </div>
         </form>
