@@ -21,39 +21,39 @@
         <div class="card text-center mt-2" style="width: 55%">
             <div class="card" style="width: 100%">
                 <div class="card-header">
-                    User registration
+                    Регистрация пользователя
                 </div>
                 <div class="card-body shadow">
                     <form th:action="@{/users/register}" method="POST">
-                        <label>First name</label>
+                        <label>Имя</label>
                         <div class="form-group row justify-content-center">
-                            <input type="text" class="form-control bg-light col-md-6" placeholder="type a login"
+                            <input type="text" class="form-control bg-light col-md-6" placeholder="Ваше имя"
                                    name="firstName" id="FirstName" required>
                         </div>
-                        <label>Last name</label>
+                        <label>Фамилия</label>
                         <div class="form-group row justify-content-center">
-                            <input type="text" class="form-control bg-light col-md-6" placeholder="type a login"
+                            <input type="text" class="form-control bg-light col-md-6" placeholder="Ваша фамилия"
                                    name="lastName" id="LastName" required>
                         </div>
-                        <label>Email</label>
+                        <label>Адрес электронной почты</label>
                         <div class="form-group row justify-content-center">
-                            <input type="text" class="form-control bg-light col-md-6" placeholder="type a login"
+                            <input type="text" class="form-control bg-light col-md-6" placeholder="Введите адрес электронной почты"
                                    name="email" id="Email" required>
                         </div>
-                        <label>Login</label>
+                        <label>Логин</label>
                         <div class="form-group row justify-content-center">
-                            <input type="text" class="form-control bg-light col-md-6" placeholder="type a login"
+                            <input type="text" class="form-control bg-light col-md-6" placeholder="Введите логин для входа"
                                    name="login" id="login" required>
                         </div>
-                        <label>Password</label>
+                        <label>Пароль</label>
                         <div class="form-group row justify-content-center">
                             <input type="password" class="form-control bg-light col-md-6"
-                                   placeholder="*******"
+                                   placeholder="Введите Ваш пароль"
                                    name="password" id="password" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="role.id">Тип</label>
+                            <label for="role.id">Ваша роль в учреждении</label>
                             <select class="form-control" id="role.id"  name="roleId">
                                 <option th:each="role: ${roles}"
                                         th:text="${role.name}"
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="schoolClass">Класс</label>
+                            <label for="schoolClass">Класс (если Вы ученик)</label>
                             <select class="form-control" id="schoolClass"  name="classId">
                                 <option th:each="schoolClass: ${classes}"
                                         th:text="${schoolClass.name}"
@@ -72,9 +72,9 @@
 
                         <div class="form-group row justify-content-center">Если Вы зарегистрированы :
                             <a th:href="@{/users/login}" class="link" role="button"
-                               aria-pressed="true">Log in</a>
+                               aria-pressed="true">Войти</a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                     </form>
                 </div>
             </div>
