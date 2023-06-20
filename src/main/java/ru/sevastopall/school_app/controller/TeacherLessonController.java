@@ -8,7 +8,9 @@ import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,6 +43,19 @@ public class TeacherLessonController {
     public String getTeachers(Model model) {
         model.addAttribute("teachers", teachers.findAll());
         return "admin/teachers/list";
+    }
+
+    @GetMapping("/teachers/{id}")
+    public String getTeacherPage(Model model, @PathVariable int id) {
+        var teacherOptional = teachers.findById(id);
+        if (teacherOptional.isEmpty()) {
+            model.addAttribute("message", "Учитель не найден");
+            return "errors/404";
+        }
+        Teacher teacher = teacherOptional.get();
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("subjects", lessons.findByTeacher(teacher).stream().map(Lesson::getSubject).distinct().collect(Collectors.toList()));
+        return "admin/teachers/one";
     }
 
     @GetMapping("/subjects/create")
