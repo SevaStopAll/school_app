@@ -2,7 +2,6 @@ package ru.sevastopall.school_app.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.*;
@@ -43,6 +42,13 @@ public class ScheduleController {
                 Integer.parseInt(endDate3), Integer.parseInt(endDate2), Integer.parseInt(endDate1)
         ));
         weeks.save(schoolWeek);
+        for (int i = 0; i < 5; i++) {
+            SchoolDay day = new SchoolDay();
+            day.setWeek(schoolWeek);
+            day.setDate(schoolWeek.getStartDay().plusDays(i));
+            day.setName(day.getDate().getDayOfWeek() + " " + day.getDate());
+            days.save(day);
+        }
         return "redirect:/";
     }
 
@@ -113,8 +119,8 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedule/class/create")
-    public String saveClassDay(@ModelAttribute ClassDay classday,
-                               String lessonDate1, String lessonDate2, String lessonDate3, String schoolClass1, String number1, String subject1, String teacher1,
+    public String saveClassDay(@ModelAttribute ClassDay classday, Model model,
+                               String schoolClass1, String number1, String subject1, String teacher1,
                                String number2, String subject2, String teacher2,
                                String number3, String subject3, String teacher3,
                                String number4, String subject4, String teacher4,
@@ -122,10 +128,16 @@ public class ScheduleController {
                                String number6, String subject6, String teacher6,
                                String number7, String subject7, String teacher7,
                                String number8, String subject8, String teacher8) {
+
+        LocalDate lessonDate = classday.getSchoolDay().getDate();
+        SchoolClass schoolClass = classes.findById(Integer.parseInt(schoolClass1)).get();
+        if (classDays.findBySchoolClassAndDate(schoolClass, lessonDate).isPresent()) {
+            model.addAttribute("message", "Расписание для класса на этот день уже существует");
+            return "errors/404";
+        }
+        classday.setSchoolClass(schoolClass);
         List<Lesson> lessonSet = new ArrayList<>();
-        LocalDate lessonDate = LocalDate.of(
-                Integer.parseInt(lessonDate3), Integer.parseInt(lessonDate2), Integer.parseInt(lessonDate1)
-        );
+
         classday.setDate(lessonDate);
         if (!number1.equals("0")) {
             lessonSet.add(createNewLesson(lessonDate, schoolClass1, number1, subject1, teacher1));
@@ -152,7 +164,7 @@ public class ScheduleController {
             lessonSet.add(createNewLesson(lessonDate, schoolClass1, number8, subject8, teacher8));
         }
         classday.setLessons(lessonSet);
-        classday.setSchoolClass(classes.findById(Integer.parseInt(schoolClass1)).get());
+        classday.setName(classday.getSchoolClass().getName() + " " + classday.getDate());
         classDays.save(classday);
         return "redirect:/";
     }
@@ -183,7 +195,9 @@ public class ScheduleController {
         lesson.setSubject(subjects.findById(Integer.parseInt(subject)).get());
         lesson.setSchoolClass(classes.findById(Integer.parseInt(schoolClass)).get());
         lesson.setTeacher(teachers.findById(Integer.parseInt(teacher)).get());
-        lesson.setName(lesson.getLessonDate() + lesson.getSchoolClass().getName() + lesson.getNumber() + lesson.getSubject().getName());
+        StringBuilder builder = new StringBuilder();
+        builder.append(lesson.getLessonDate()).append(" ").append(lesson.getSchoolClass().getName()).append(" ").append(lesson.getNumber()).append(" ").append(lesson.getSubject().getName());
+        lesson.setName(builder.toString());
         return lessons.save(lesson).get();
     }
 }

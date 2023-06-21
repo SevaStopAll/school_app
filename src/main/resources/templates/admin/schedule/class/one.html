@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="lesson: ${lessons}">
-                    <td><a th:text="${lesson.name}" th:href="@{/admin/lessons/{lessonId}(lessonId=${lesson.id})}"></a></td>
+                    <td><a th:text="${lesson.number + lesson.subject.name}"> </a> <a th:text="${lesson.teacher.lastName}" th:if="${user.id == lesson.teacher.user.id}" th:href="@{/admin/lessons/{lessonId}(lessonId=${lesson.id})}"></a></td>
                 </tr>
                 </tbody>
             </table>

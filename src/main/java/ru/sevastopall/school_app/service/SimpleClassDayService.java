@@ -7,6 +7,7 @@ import ru.sevastopall.school_app.domain.SchoolClass;
 import ru.sevastopall.school_app.domain.SchoolDay;
 import ru.sevastopall.school_app.repository.ClassDayRepository;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -33,11 +34,15 @@ public class SimpleClassDayService implements ClassDayService {
     @Override
     public Collection<ClassDay> findBySchoolDay(SchoolDay schoolDay) {
         return classDays.findBySchoolDay(schoolDay);
-
     }
 
     @Override
     public Collection<ClassDay> findAll() {
         return classDays.findAll();
+    }
+
+    @Override
+    public Optional<ClassDay> findBySchoolClassAndDate(SchoolClass schoolClass, LocalDate date) {
+        return classDays.findBySchoolClassAndDate(schoolClass, date);
     }
 }

@@ -42,7 +42,6 @@
                                 <li><a class="dropdown-item" th:href="@{/admin/students/create}">Добавить ученика</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/students/list}">Список учеников</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/week/create}">Добавить учебную неделю</a></li>
-                                <li><a class="dropdown-item" th:href="@{/admin/schedule/day/create}">Добавить учебный день</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/week/list}">Посмотреть расписание</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/class/create}">Добавить расписание для класса</a></li>
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/class/list}">Посмотреть расписание всех классов</a></li>
@@ -75,13 +74,8 @@
                             </ul>
                         </div>
                     </div>
-                <div class="d-flex" th:if="${user.login == 'Гость'}">
-                    <a class="nav-link text-secondary me-3" th:href="@{/users/register}">Регистрация сотрудника</a>
-                    <a class="nav-link text-secondary me-3" th:href="@{/users/studentRegister}">Регистрация ученика</a>
-                    <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
-                </div>
                 <div class="d-flex" th:if="${user.login != 'Гость'}">
-                    <a class="nav-link text-secondary me-3" href="#" th:text="${user.login}"></a>
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/{userId}(userId=${user.id})}" th:text="${user.login}" ></a>
                     <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
                 </div>
                 </div>

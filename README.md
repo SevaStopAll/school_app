@@ -24,14 +24,24 @@ Launch Main.class /src/main/java/ru.sevastopall.school_app
 - **PostgresSQL 14**
 
 ### Скриншоты:
+Окно регистрации
+
+
+![](src//main/resources/static/Register.png)
 
 Окно расписания
+
+
 ![](src//main/resources/static/ClassesSchedule.png)
 
 Добавление учебного дня для класса
+
+
 ![](src/main/resources/static/createClassDay.png)
 
+Окно урока 
+
+![](src/main/resources/static/LessonScreen.png)
 
 ### Текущие задачи:
-        Работа с профилями учеников и учителей для большей инфомативности. Выставление оценок только учителем, ведущим урок 
-    
+        Работа с профилями учеников и учителей для большей инфомативности. Выставление оценок только учителем, ведущим урок  
