@@ -67,7 +67,7 @@ public class ClassesController {
         }
         Student student = studentOptional.get();
         model.addAttribute("student", student);
-        List<Mark> studentMarks = marks.findByStudentId(student.getId());
+        List<Mark> studentMarks = marks.findByStudent(student);
         studentMarks.stream().map(mark -> mark.getSubject().getName()).collect(Collectors.toList());
         model.addAttribute("marks", studentMarks);
         model.addAttribute("demo", marks.getResults(student));

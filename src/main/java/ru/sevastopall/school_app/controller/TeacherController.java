@@ -46,12 +46,6 @@ public class TeacherController {
         return "teacher/mark/create";
     }
 
-    @PostMapping("/mark/create")
-    public String save(@ModelAttribute Mark mark) {
-        marks.save(mark);
-        return "redirect:/";
-    }
-
     @PostMapping("/mark/new")
     public String saveMark(@ModelAttribute Mark mark, String student, String subject, String teacher, String scoreId) {
         mark.setScore(score.findById(Integer.parseInt(scoreId)).get());

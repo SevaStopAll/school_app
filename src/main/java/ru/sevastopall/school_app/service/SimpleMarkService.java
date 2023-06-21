@@ -25,8 +25,8 @@ public class SimpleMarkService implements MarkService {
     }
 
     @Override
-    public List<Mark> findByStudentId(int studentId) {
-        return marks.findByStudentId(studentId);
+    public List<Mark> findByStudent(Student student) {
+        return marks.findByStudent(student);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class SimpleMarkService implements MarkService {
                 .toList();
         System.out.println(studentSubjects.size());
         studentSubjects.forEach(subj -> results.put(subj.getName(), new ArrayList<>()));
-            List <Mark> stMark = marks.findByStudentId(student.getId());
+            List <Mark> stMark = marks.findByStudent(student);
             for (Mark mark : stMark) {
                 String subjName = mark.getSubject().getName();
                 if (results.containsKey(subjName)) {

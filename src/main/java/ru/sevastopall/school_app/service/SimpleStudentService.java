@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sevastopall.school_app.domain.SchoolClass;
 import ru.sevastopall.school_app.domain.Student;
+import ru.sevastopall.school_app.domain.User;
 import ru.sevastopall.school_app.repository.StudentRepository;
 
 import java.util.Optional;
@@ -32,5 +33,10 @@ public class SimpleStudentService implements StudentService {
     @Override
     public Set<Student> findBySchoolClass(SchoolClass schoolClass) {
         return students.findBySchoolClass(schoolClass);
+    }
+
+    @Override
+    public Optional<Student> findByUser(User user) {
+        return students.findByUser(user);
     }
 }

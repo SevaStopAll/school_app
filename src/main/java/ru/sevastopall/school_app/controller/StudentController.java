@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sevastopall.school_app.domain.Homework;
-import ru.sevastopall.school_app.domain.SchoolClass;
-import ru.sevastopall.school_app.domain.Student;
-import ru.sevastopall.school_app.service.HomeworkService;
-import ru.sevastopall.school_app.service.MarkService;
-import ru.sevastopall.school_app.service.SchoolClassService;
-import ru.sevastopall.school_app.service.StudentService;
+import ru.sevastopall.school_app.domain.*;
+import ru.sevastopall.school_app.service.*;
+
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/student")
@@ -19,19 +17,20 @@ import ru.sevastopall.school_app.service.StudentService;
 public class StudentController {
     private HomeworkService homeworks;
     private MarkService marks;
-    private SchoolClassService classes;
+    private StudentService students;
+    private UserService users;
 
-    @GetMapping("/homework")
-    public String getHomework(Model model) {
-        SchoolClass schoolClass = classes.findById(1).get();
-        model.addAttribute("homeworks", homeworks.findBySchoolClass(schoolClass));
-        return "student/homework";
-    }
-
-    @GetMapping("/marks")
-    public String getMarks(Model model) {
-        model.addAttribute("marks", marks.findByStudentId(1));
-        return "student/marks";
+    @GetMapping("/{id}")
+    public String getInfo(Model model, @PathVariable int id) {
+        var studentOptional = students.findByUser(users.findById(id).get());
+        if (studentOptional.isEmpty()) {
+            model.addAttribute("message", "Нет студента с указанным идентификатором");
+            return "errors/404";
+        }
+        Student student = studentOptional.get();
+        model.addAttribute("marks", marks.findByStudent(student));
+        model.addAttribute("homeworks", homeworks.findBySchoolClass(student.getSchoolClass()));
+        return "student/one";
     }
 
 }

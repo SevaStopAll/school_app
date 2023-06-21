@@ -11,7 +11,7 @@ public interface MarkService {
 
     Optional<Mark> save(Mark mark);
 
-    List<Mark> findByStudentId(int studentId);
+    List<Mark> findByStudent(Student student);
 
     List<Mark> findByTeacher(Teacher teacher);
 
