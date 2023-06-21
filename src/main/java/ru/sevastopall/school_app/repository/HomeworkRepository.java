@@ -14,4 +14,6 @@ public interface HomeworkRepository extends CrudRepository<Homework, Integer> {
     Set<Homework> findBySchoolClass(SchoolClass schoolClass);
 
     Set<Homework> findByLesson(Lesson lesson);
+
+    Set<Homework> findByTeacher(Teacher teacher);
 }

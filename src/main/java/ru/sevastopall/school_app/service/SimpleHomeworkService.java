@@ -27,9 +27,13 @@ public class SimpleHomeworkService implements HomeworkService {
     public Set<Homework> findBySchoolClass(SchoolClass schoolClass) {
         return homeworkRepository.findBySchoolClass(schoolClass);
     }
-
+    @Override
     public Set<Homework> findByLesson(Lesson lesson) {
         return homeworkRepository.findByLesson(lesson);
     };
+    @Override
+    public Set<Homework> findByTeacher(Teacher teacher) {
+        return homeworkRepository.findByTeacher(teacher);
+    }
 
 }

@@ -3,7 +3,9 @@ package ru.sevastopall.school_app.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sevastopall.school_app.domain.Mark;
+import ru.sevastopall.school_app.domain.Student;
 import ru.sevastopall.school_app.domain.Teacher;
+import ru.sevastopall.school_app.domain.User;
 import ru.sevastopall.school_app.repository.TeacherRepository;
 
 import java.util.Collection;
@@ -28,5 +30,10 @@ public class SimpleTeacherService implements TeacherService {
     @Override
     public Optional<Teacher> findById(int id) {
         return teachers.findById(id);
+    }
+
+    @Override
+    public Optional<Teacher> findByUser(User user) {
+        return teachers.findByUser(user);
     }
 }

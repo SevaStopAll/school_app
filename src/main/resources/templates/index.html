@@ -57,6 +57,7 @@
                                     </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li><a class="dropdown-item" th:href="@{/admin/schedule/week/list}">Расписание</a></li>
+                                <li><a class="dropdown-item" th:href="@{/teacher/{userId}(userId=${user.id})}">Оценки и домашнее задание</a></li>
                             </ul>
                             </ul>
                         </div>
@@ -67,7 +68,7 @@
                                         Ученику
                                     </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" th:href="@{/student/{userId}(userId=${user.id})}">Посмотреть домашнее задание</a></li>
+                                <li><a class="dropdown-item" th:href="@{/student/{userId}(userId=${user.id})}">Посмотреть оценки и домашнее задание</a></li>
                             </ul>
                             </ul>
                         </div>

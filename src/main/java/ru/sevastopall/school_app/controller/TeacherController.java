@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.school_app.domain.Homework;
 import ru.sevastopall.school_app.domain.Mark;
+import ru.sevastopall.school_app.domain.Student;
+import ru.sevastopall.school_app.domain.Teacher;
 import ru.sevastopall.school_app.service.*;
 
 @Controller
@@ -20,6 +22,7 @@ public class TeacherController {
     private StudentService students;
     private HomeworkService homeworks;
     private LessonService lessons;
+    private UserService users;
 
 
     @GetMapping("/homework/create")
@@ -54,5 +57,18 @@ public class TeacherController {
         mark.setSubject(subjects.findById(Integer.parseInt(subject)).get());
         marks.save(mark);
         return "redirect:/";
+    }
+
+    @GetMapping("/{id}")
+    public String getInfo(Model model, @PathVariable int id) {
+        var teacherOptional = teachers.findByUser(users.findById(id).get());
+        if (teacherOptional.isEmpty()) {
+            model.addAttribute("message", "Нет студента с указанным идентификатором");
+            return "errors/404";
+        }
+        Teacher teacher = teacherOptional.get();
+        model.addAttribute("marks", marks.findByTeacher(teacher));
+        model.addAttribute("homeworks", homeworks.findByTeacher(teacher));
+        return "teacher/one";
     }
 }

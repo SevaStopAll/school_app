@@ -16,4 +16,5 @@ public interface HomeworkService {
 
     Set<Homework> findByLesson(Lesson lesson);
 
+    Set<Homework> findByTeacher(Teacher teacher);
 }
