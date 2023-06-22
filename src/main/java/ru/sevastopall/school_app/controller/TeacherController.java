@@ -1,6 +1,8 @@
 package ru.sevastopall.school_app.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,10 @@ import ru.sevastopall.school_app.domain.Mark;
 import ru.sevastopall.school_app.domain.Student;
 import ru.sevastopall.school_app.domain.Teacher;
 import ru.sevastopall.school_app.service.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Controller
 @RequestMapping("/teacher")
@@ -70,5 +76,14 @@ public class TeacherController {
         model.addAttribute("marks", marks.findByTeacher(teacher));
         model.addAttribute("homeworks", homeworks.findByTeacher(teacher));
         return "teacher/one";
+    }
+
+    @GetMapping("/file/{id}")
+    public ResponseEntity<byte[]> getInfo(@PathVariable int id) throws IOException {
+        var content = Files.readAllBytes(Path.of("./pom.xml"));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_XML)
+                .contentLength(content.length)
+                .body(content);
     }
 }
