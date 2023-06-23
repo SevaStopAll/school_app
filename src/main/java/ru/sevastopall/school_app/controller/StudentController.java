@@ -1,6 +1,9 @@
 package ru.sevastopall.school_app.controller;
 
 import lombok.AllArgsConstructor;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sevastopall.school_app.domain.*;
 import ru.sevastopall.school_app.service.*;
+import ru.sevastopall.school_app.utils.ReportSender;
+import ru.sevastopall.school_app.utils.XLSXReportMaker;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,6 +34,10 @@ public class StudentController {
     private StudentService students;
     private UserService users;
 
+    private XLSXReportMaker maker;
+
+    private ReportSender sender;
+
     @GetMapping("/{id}")
     public String getInfo(Model model, @PathVariable int id) {
         var studentOptional = students.findByUser(users.findById(id).get());
@@ -42,49 +52,9 @@ public class StudentController {
     }
 
     @GetMapping("/file/{id}")
-    public ResponseEntity<byte[]> getInfo(@PathVariable int id) throws IOException {
-        var studentOptional = students.findByUser(users.findById(id).get());
-        Student student = studentOptional.get();
-        try (FileWriter out = new FileWriter("./src/main/resources/data/report.txt")) {
-            out.append("Оценки");
-            out.append(System.lineSeparator());
-            out.append("Оценка");
-            out.append(" ");
-            out.append("Предмет");
-            out.append(" ");
-            out.append("Ученик");
-            out.append(System.lineSeparator());
-            for (Mark mark : marks.findByStudent(student)) {
-                out.append(String.valueOf(mark.getScore().getId()));
-                out.append(mark.getSubject().getName());
-                out.append(mark.getStudent().getLastName());
-                out.append(System.lineSeparator());
-            }
-            out.append(System.lineSeparator());
-            out.append(System.lineSeparator());
-            out.append("Домашнее задание");
-            out.append(System.lineSeparator());
-            out.append("Предмет");
-            out.append(" ");
-            out.append("Описание");
-            out.append(" ");
-            for (Homework homework : homeworks.findBySchoolClass(student.getSchoolClass())) {
-                out.append(homework.getSubject().getName());
-                out.append(homework.getDescription());
-                out.append(System.lineSeparator());
-            }
-
-            out.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        var content = Files.readAllBytes(Path.of("./src/main/resources/data/report.txt"));
-        HttpHeaders headers = new HttpHeaders();
-        String filename = "Report.txt";
-        headers.setContentDispositionFormData(filename, filename);
-        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-        headers.setContentType(MediaType.parseMediaType("application/txt"));
-        return new ResponseEntity<>(content,headers, HttpStatus.OK);
+    public ResponseEntity<byte[]> getInfo(@PathVariable int id) {
+        maker.makeStudentReport(id);
+        return sender.sendReport();
     }
 
 }
