@@ -14,20 +14,48 @@ import java.util.Set;
 public class SimpleTeacherService implements TeacherService {
     private TeacherRepository teachers;
 
+    /**
+     * Создать нового учителя
+     *
+     * @param teacher - новый учитель
+     *
+     * @return Optional учителя.
+     */
     @Override
     public Optional<Teacher> save(Teacher teacher) {
         return Optional.of(teachers.save(teacher));
     }
 
+    /**
+     * Получить список всех учителей
+     *
+     *
+     * @return список учителей.
+     */
     @Override
     public Set<Teacher> findAll() {
         return teachers.findAll();
     }
 
+    /**
+     * Получить список учителей
+     *
+     *
+     * @return список учителей.
+     */
+
     @Override
     public Optional<Teacher> findById(int id) {
         return teachers.findById(id);
     }
+
+    /**
+     * Найти учителя по пользователю сервиса
+     *
+     * @param user - пользователь
+     *
+     * @return Optional учителя.
+     */
 
     @Override
     public Optional<Teacher> findByUser(User user) {

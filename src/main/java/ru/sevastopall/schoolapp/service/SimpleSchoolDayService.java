@@ -15,27 +15,52 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SimpleSchoolDayService implements SchoolDayService {
     private SchoolDayRepository days;
-
+    /**
+     * Сохранить новый школьный день
+     * @param day школьный день
+     * @return Optional школьного дня.
+     */
     @Override
     public Optional<SchoolDay> save(SchoolDay day) {
         return Optional.of(days.save(day));
     }
 
+    /**
+     * Найти учебный день по идентификатору
+     * @param id идентификатор дня
+     * @return Optional учебного дня.
+     */
     @Override
     public Optional<SchoolDay> findById(int id) {
         return days.findById(id);
     }
 
+    /**
+     * Найти учебный день по названию
+     * @param name названию
+     * @return Optional учебного дня.
+     */
     @Override
     public Optional<SchoolDay> findByName(String name) {
         return days.findByName(name);
     }
 
+    /**
+     * Получить список учебных дней
+     *
+     *
+     * @return список учебных дней.
+     */
     @Override
     public Collection<SchoolDay> findAll() {
         return days.findAll();
     }
 
+    /**
+     * Найти учебный день по учебной неделе
+     * @param week неделе
+     * @return Optional учебного дня.
+     */
     @Override
     public Collection<SchoolDay> findByWeek(SchoolWeek week) {
         return days.findByWeek(week);

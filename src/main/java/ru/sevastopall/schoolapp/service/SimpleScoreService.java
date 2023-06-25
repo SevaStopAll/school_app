@@ -13,12 +13,23 @@ import java.util.Set;
 public class SimpleScoreService implements ScoreService {
     private ScoreRepository score;
 
-
+    /**
+     * Найти оценку по id
+     *
+     *
+     * @return Optional оценки.
+     */
     @Override
     public Optional<Score> findById(int id) {
         return score.findById(id);
     }
 
+    /**
+     * Получить список оценок
+     *
+     *
+     * @return список оценок.
+     */
     @Override
     public Set<Score> findAll() {
         return score.findAll();

@@ -2,7 +2,7 @@ create table if not exists school_week(
     id serial primary key,
     start_day date,
     end_day date
-)
+);
 
 comment on table school_week is 'Таблица учебных недель';
 comment on column school_week.id is 'Идентификатор';

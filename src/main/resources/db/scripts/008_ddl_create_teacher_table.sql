@@ -9,4 +9,4 @@ comment on table teacher is 'Таблица учителей';
 comment on column teacher.id is 'Идентификатор';
 comment on column teacher.first_name is 'Имя';
 comment on column teacher.last_name is 'Фамилия';
-comment on column teacher.email is 'Электронная почта';
+comment on column teacher.user_id is 'Пользователь';

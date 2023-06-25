@@ -13,24 +13,51 @@ import java.util.Set;
 public class SimpleHomeworkService implements HomeworkService {
     private HomeworkRepository homeworkRepository;
 
+    /**
+     * Добавить домашнее задание
+     * @param homework домашнее задание
+     * @return Optional домашнего задания.
+     */
     @Override
     public Optional<Homework> add(Homework homework) {
         return Optional.of(homeworkRepository.save(homework));
     }
 
+    /**
+     * Найти домашние задания по предмету
+     * @param subject предмет
+     * @return список домашних заданий.
+     */
     @Override
     public Set<Homework> findBySubject(Subject subject) {
         return homeworkRepository.findBySubject(subject);
     }
 
+    /**
+     * Найти домашние задания по классу
+     * @param schoolClass класс
+     * @return лист домашних заданий.
+     */
     @Override
     public Set<Homework> findBySchoolClass(SchoolClass schoolClass) {
         return homeworkRepository.findBySchoolClass(schoolClass);
     }
+
+    /**
+     * Найти домашние задания по уроку
+     * @param lesson урок
+     * @return лист домашних заданий.
+     */
     @Override
     public Set<Homework> findByLesson(Lesson lesson) {
         return homeworkRepository.findByLesson(lesson);
     };
+
+    /**
+     * Найти домашние задания по учителю
+     * @param teacher учитель
+     * @return лист домашних заданий.
+     */
     @Override
     public Set<Homework> findByTeacher(Teacher teacher) {
         return homeworkRepository.findByTeacher(teacher);

@@ -14,26 +14,51 @@ public class SimpleMarkService implements MarkService {
     private MarkRepository marks;
     private LessonService lessons;
 
+    /**
+     * Добавить оценку
+     * @param mark оценка
+     * @return Optional оценки.
+     */
     @Override
     public Optional<Mark> save(Mark mark) {
         return Optional.of(marks.save(mark));
     }
 
+    /**
+     * Найти оценки по ученику
+     * @param student ученик
+     * @return лист оценок.
+     */
     @Override
     public List<Mark> findByStudent(Student student) {
         return marks.findByStudent(student);
     }
 
+    /**
+     * Найти оценки по учителю
+     * @param teacher учитель
+     * @return лист оценок.
+     */
     @Override
     public List<Mark> findByTeacher(Teacher teacher) {
         return marks.findByTeacher(teacher);
     }
 
+    /**
+     * Найти оценки по предмету
+     * @param subject предмет
+     * @return лист оценок.
+     */
     @Override
     public List<Mark> findBySubject(Subject subject) {
         return marks.findBySubject(subject);
     }
 
+    /**
+     * Получить информацию по оценкам ученика
+     * @param student ученик
+     * @return лист оценок ученика по каждому предмету
+     */
     @Override
     public Map<String, List<Integer>> getResults(Student student) {
         Map<String, List<Integer>> results = new HashMap<>();

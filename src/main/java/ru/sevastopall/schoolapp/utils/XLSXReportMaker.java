@@ -24,6 +24,11 @@ public class XLSXReportMaker implements ReportMaker {
     private UserService users;
     private TeacherService teachers;
 
+    /**
+     * Создать стиль
+     *
+     * @return стиль для заголовков таблицы.
+     */
     private CellStyle setStyle(Workbook book) {
         CellStyle style = book.createCellStyle();
         Font font = book.createFont();
@@ -33,6 +38,11 @@ public class XLSXReportMaker implements ReportMaker {
         return style;
     }
 
+    /**
+     * Создать страницу с оценками
+     *
+     * @return страница с оценками для ученика/учителя.
+     */
     private XSSFSheet createMarkSheet(XSSFWorkbook book, CellStyle style) {
         XSSFSheet sheet = book.createSheet("Оценки");
         Row row = sheet.createRow(0);
@@ -48,6 +58,11 @@ public class XLSXReportMaker implements ReportMaker {
         return sheet;
     }
 
+    /**
+     * Создать страницу с домашними заданиями
+     *
+     * @return страница с домашними заданиями для ученика/учителя.
+     */
     private XSSFSheet createHomeworkSheet(XSSFWorkbook book, CellStyle style) {
         XSSFSheet homeworkSheet = book.createSheet("Домашние задания");
         Row row1 = homeworkSheet.createRow(0);
@@ -60,6 +75,13 @@ public class XLSXReportMaker implements ReportMaker {
         return homeworkSheet;
     }
 
+    /**
+     * Записать оценку на страницу
+     * @param sheet текущий лист
+     * @param mark текущая оценка
+     * @param lastCellValue клетка для записи
+     * @param rowCounter строка для записи
+     */
     private void writeMark(Sheet sheet, Mark mark, String lastCellValue, AtomicInteger rowCounter) {
         Row tableRow = sheet.createRow(rowCounter.get());
         int cellCounter = 0;
@@ -71,6 +93,11 @@ public class XLSXReportMaker implements ReportMaker {
         name.setCellValue(lastCellValue);
     }
 
+    /**
+     * Записать оценку на страницу
+     * @param sheet текущий лист
+     * @param homework домашнее задание для записи
+     */
     private void writeHomework(Sheet sheet, Homework homework, AtomicInteger rowCounter) {
         Row tableRow = sheet.createRow(rowCounter.get());
         int cellCounter = 0;
@@ -80,6 +107,10 @@ public class XLSXReportMaker implements ReportMaker {
         description.setCellValue(homework.getDescription());
     }
 
+    /**
+     * Создать и подготовить к загрузке отчет для ученика:
+     * @param studentId идентификатор ученика
+     */
     @Override
     public void makeStudentReport(int studentId) {
         var studentOptional = students.findByUser(users.findById(studentId).get());
@@ -104,6 +135,10 @@ public class XLSXReportMaker implements ReportMaker {
         }
     }
 
+    /**
+     * Создать и подготовить к загрузке отчет для учителя:
+     * @param teacherId идентификатор учителя
+     */
     @Override
     public void makeTeacherReport(int teacherId) {
         var teacherOptional = teachers.findByUser(users.findById(teacherId).get());

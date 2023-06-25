@@ -13,8 +13,13 @@ import java.nio.file.Path;
 @Component
 public class ReportSender {
 
+    /**
+     * Отправить отчет
+     *
+     * @return файл отчета в XLSX формате.
+     */
     public ResponseEntity<byte[]> sendReport() {
-        byte[] content = new byte[0];
+        byte[] content;
         try {
             content = Files.readAllBytes(Path.of("./src/main/resources/data/report.xlsx"));
         } catch (IOException e) {
