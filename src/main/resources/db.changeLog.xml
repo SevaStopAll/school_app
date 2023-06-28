@@ -23,5 +23,6 @@
     <include file="db/scripts/016_ddl_create_school_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/017_ddl_create_class_day_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/018_ddl_create_class_day_lesson_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/019_dml_insert_users_table.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
