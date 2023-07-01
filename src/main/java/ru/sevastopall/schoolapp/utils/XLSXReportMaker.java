@@ -39,6 +39,26 @@ public class XLSXReportMaker implements ReportMaker {
     }
 
     /**
+     * Создать страницу с общими данными по оценкам
+     *
+     * @return страница с общими данными по оценкам.
+     */
+    private XSSFSheet createStaticSheet(XSSFWorkbook book, CellStyle style) {
+        XSSFSheet sheet = book.createSheet("Общие данные");
+        Row row = sheet.createRow(0);
+        Cell subject = row.createCell(0);
+        subject.setCellValue("Предмет");
+        subject.setCellStyle(style);
+        Cell avgMark = row.createCell(1);
+        avgMark.setCellValue("Средняя оценка");
+        avgMark.setCellStyle(style);
+        Cell countMark = row.createCell(2);
+        countMark.setCellValue("Количество оценок");
+        countMark.setCellStyle(style);
+        return sheet;
+    }
+
+    /**
      * Создать страницу с оценками
      *
      * @return страница с оценками для ученика/учителя.
@@ -129,6 +149,17 @@ public class XLSXReportMaker implements ReportMaker {
                 writeHomework(homeworkSheet, homework1, rowCounter);
                 rowCounter.incrementAndGet();
             }
+            // Demo of new feature
+            XSSFSheet infoSheet = createStaticSheet(book, style);
+            rowCounter.set(1);
+            Row tableRow = infoSheet.createRow(rowCounter.get());
+            int cellCounter = 0;
+            Cell subjectName = tableRow.createCell(cellCounter++);
+            subjectName.setCellValue(homework.getSubject().getName());
+            Cell avgMark = tableRow.createCell(cellCounter++);
+            avgMark.setCellValue(homework.getDescription());
+            Cell counterMark = tableRow.createCell(cellCounter++);
+            counterMark.setCellValue(marks.getResults());
             book.write(new FileOutputStream("./src/main/resources/data/report.xlsx"));
         } catch (IOException e) {
             throw new RuntimeException(e);
