@@ -15,12 +15,21 @@
 - **Spring (Data, MVC)**
 
 ### Запуск
-Launch Main.class /src/main/java/ru.sevastopall.schoolapp
+Из IDE: Main.class /src/main/java/ru.sevastopall.schoolapp
+
+Docker-Compose:
+1. клонируем проект через git clone; 
+2. переходим в папку проекта;
+3. вводим команду docker-compose build;
+4. после завершения сборки вводим docker-compose up;
+5. работа с проектом доступна через http://127.0.0.1 / http://127.0.0.1:80;
 
 ### Требования:
 - **Java 17**
 - **Maven 3.8**
 - **PostgresSQL 14**
+- **Docker**
+- **Docker-compose**
 
 ### Скриншоты:
 Окно регистрации

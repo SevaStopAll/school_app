@@ -160,6 +160,8 @@ public class XLSXReportMaker implements ReportMaker {
             avgMark.setCellValue(homework.getDescription());
             Cell counterMark = tableRow.createCell(cellCounter++);
             counterMark.setCellValue(marks.getResults());
+
+            // End of new demo
             book.write(new FileOutputStream("./src/main/resources/data/report.xlsx"));
         } catch (IOException e) {
             throw new RuntimeException(e);
