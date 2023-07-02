@@ -13,6 +13,8 @@ import ru.sevastopall.schoolapp.service.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
@@ -35,6 +37,8 @@ public class XLSXReportMaker implements ReportMaker {
         font.setBold(true);
         font.setFontName("Times New Roman");
         style.setFont(font);
+        DataFormat format = book.createDataFormat();
+        style.setDataFormat(format.getFormat("0.00"));
         return style;
     }
 
@@ -149,19 +153,19 @@ public class XLSXReportMaker implements ReportMaker {
                 writeHomework(homeworkSheet, homework1, rowCounter);
                 rowCounter.incrementAndGet();
             }
-            // Demo of new feature
             XSSFSheet infoSheet = createStaticSheet(book, style);
             rowCounter.set(1);
-            Row tableRow = infoSheet.createRow(rowCounter.get());
-            int cellCounter = 0;
-            Cell subjectName = tableRow.createCell(cellCounter++);
-            subjectName.setCellValue(homework.getSubject().getName());
-            Cell avgMark = tableRow.createCell(cellCounter++);
-            avgMark.setCellValue(homework.getDescription());
-            Cell counterMark = tableRow.createCell(cellCounter++);
-            counterMark.setCellValue(marks.getResults());
-
-            // End of new demo
+            for (Map.Entry<String, List<Integer>> subjectMarks  : marks.getResults(student).entrySet()) {
+                Row tableRow = infoSheet.createRow(rowCounter.get());
+                int cellCounter = 0;
+                Cell subjectName = tableRow.createCell(cellCounter++);
+                Cell avgMark = tableRow.createCell(cellCounter++);
+                Cell countMark = tableRow.createCell(cellCounter++);
+                subjectName.setCellValue(subjectMarks.getKey());
+                avgMark.setCellValue(subjectMarks.getValue().stream().mapToInt(Integer::intValue).average().orElse(0));
+                countMark.setCellValue(subjectMarks.getValue().size());
+                rowCounter.incrementAndGet();
+            }
             book.write(new FileOutputStream("./src/main/resources/data/report.xlsx"));
         } catch (IOException e) {
             throw new RuntimeException(e);
