@@ -19,8 +19,8 @@ public class SimpleSchoolWeekService implements SchoolWeekService {
      * @return сохраненная школьная неделя.
      */
     @Override
-    public SchoolWeek save(SchoolWeek schoolWeek) {
-        return weeks.save(schoolWeek);
+    public Optional<SchoolWeek> save(SchoolWeek schoolWeek) {
+        return Optional.of(weeks.save(schoolWeek));
     }
 
     /**
