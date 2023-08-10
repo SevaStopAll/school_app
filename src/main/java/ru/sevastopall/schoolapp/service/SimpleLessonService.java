@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.Lesson;
 import ru.sevastopall.schoolapp.domain.SchoolClass;
 import ru.sevastopall.schoolapp.domain.Subject;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleLessonService implements LessonService {
     private final LessonRepository lessons;
 
@@ -23,6 +25,7 @@ public class SimpleLessonService implements LessonService {
      * @param lesson урок
      * @return Optional урока.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<Lesson> save(Lesson lesson) {
         return Optional.of(lessons.save(lesson));

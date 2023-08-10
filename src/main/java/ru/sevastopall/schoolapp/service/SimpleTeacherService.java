@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.Teacher;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.TeacherRepository;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleTeacherService implements TeacherService {
     private TeacherRepository teachers;
 
@@ -21,6 +23,7 @@ public class SimpleTeacherService implements TeacherService {
      *
      * @return Optional учителя.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<Teacher> save(Teacher teacher) {
         return Optional.of(teachers.save(teacher));

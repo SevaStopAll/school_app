@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.*;
 import ru.sevastopall.schoolapp.repository.*;
 
@@ -10,6 +11,7 @@ import java.util.*;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleMarkService implements MarkService {
     private MarkRepository marks;
     private LessonService lessons;
@@ -19,6 +21,7 @@ public class SimpleMarkService implements MarkService {
      * @param mark оценка
      * @return Optional оценки.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<Mark> save(Mark mark) {
         return Optional.of(marks.save(mark));

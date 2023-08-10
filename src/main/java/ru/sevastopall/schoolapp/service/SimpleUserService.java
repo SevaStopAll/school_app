@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.UserRepository;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleUserService implements UserService {
     private final UserRepository users;
 
@@ -59,6 +61,7 @@ public class SimpleUserService implements UserService {
      * @return Optional пользователя.
      */
     @Override
+    @Transactional(readOnly = false)
     public Optional<User> create(User user) {
         return Optional.of(users.save(user));
     }

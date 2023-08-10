@@ -3,6 +3,7 @@ package ru.sevastopall.schoolapp.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.SchoolDay;
 import ru.sevastopall.schoolapp.domain.SchoolWeek;
 import ru.sevastopall.schoolapp.repository.SchoolDayRepository;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @Data
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleSchoolDayService implements SchoolDayService {
     private SchoolDayRepository days;
     /**
@@ -20,6 +22,7 @@ public class SimpleSchoolDayService implements SchoolDayService {
      * @param day школьный день
      * @return Optional школьного дня.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<SchoolDay> save(SchoolDay day) {
         return Optional.of(days.save(day));

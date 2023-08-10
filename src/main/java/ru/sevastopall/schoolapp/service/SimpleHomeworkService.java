@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.*;
 import ru.sevastopall.schoolapp.repository.HomeworkRepository;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleHomeworkService implements HomeworkService {
     private HomeworkRepository homeworkRepository;
 
@@ -18,6 +20,7 @@ public class SimpleHomeworkService implements HomeworkService {
      * @param homework домашнее задание
      * @return Optional домашнего задания.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<Homework> add(Homework homework) {
         return Optional.of(homeworkRepository.save(homework));

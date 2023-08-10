@@ -2,6 +2,7 @@ package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.SchoolWeek;
 import ru.sevastopall.schoolapp.repository.SchoolWeekRepository;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class SimpleSchoolWeekService implements SchoolWeekService {
     private SchoolWeekRepository weeks;
 
@@ -18,6 +20,7 @@ public class SimpleSchoolWeekService implements SchoolWeekService {
      * @param schoolWeek Школьная неделя
      * @return сохраненная школьная неделя.
      */
+    @Transactional(readOnly = false)
     @Override
     public Optional<SchoolWeek> save(SchoolWeek schoolWeek) {
         return Optional.of(weeks.save(schoolWeek));
