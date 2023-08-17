@@ -1,4 +1,4 @@
-package ru.sevastopall.schoolapp;
+package ru.sevastopall.schoolapp.integration;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.test.context.DynamicPropertyRegistry;

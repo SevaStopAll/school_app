@@ -1,13 +1,13 @@
-package ru.sevastopall.schoolapp.service;
+package ru.sevastopall.schoolapp.integration.service;
 
 
-import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.sevastopall.schoolapp.IntegrationTestBase;
+import ru.sevastopall.schoolapp.integration.IntegrationTestBase;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.UserRepository;
+import ru.sevastopall.schoolapp.service.SimpleUserService;
 
 import java.util.List;
 import java.util.Optional;

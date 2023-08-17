@@ -1,9 +1,10 @@
-package ru.sevastopall.schoolapp.controller;
+package ru.sevastopall.schoolapp.unit.controller;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.ArgumentCaptor;
 import org.springframework.ui.ConcurrentModel;
+import ru.sevastopall.schoolapp.controller.ClassesController;
 import ru.sevastopall.schoolapp.domain.SchoolClass;
 import ru.sevastopall.schoolapp.service.MarkService;
 import ru.sevastopall.schoolapp.service.SchoolClassService;

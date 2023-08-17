@@ -1,4 +1,4 @@
-package ru.sevastopall.schoolapp.controller;
+package ru.sevastopall.schoolapp.unit.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import ru.sevastopall.schoolapp.service.HomeworkService;
