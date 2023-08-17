@@ -1,37 +1,11 @@
-CREATE TABLE if not exists score (
-    id serial primary key,
-    description int unique
-);
+insert into school_class(id, name) values(1, '1A');
 
-insert into score(description) values(1) ON CONFLICT DO NOTHING;
-insert into score(description) values(2) ON CONFLICT DO NOTHING;
-insert into score(description) values(3) ON CONFLICT DO NOTHING;
-insert into score(description) values(4) ON CONFLICT DO NOTHING;
-insert into score(description) values(5) ON CONFLICT DO NOTHING;
+insert into users(id, first_name, last_name, email, login, password, confirmed)
+values(5, 'test', 'test', 'test@mail.ru', 'test', 'test', true);
 
-CREATE TABLE if not exists school_class (
-    id serial primary key,
-    name varchar(256) UNIQUE
-);
+insert into user_role(user_id, role_id) values(5, 1);
 
-create table if not exists role(
-    id serial primary key,
-    name varchar(255) UNIQUE
-);
-
-insert into role(name) values('Admin') ON CONFLICT DO NOTHING;
-insert into role(name) values('Teacher') ON CONFLICT DO NOTHING;
-insert into role(name) values('Student') ON CONFLICT DO NOTHING;
-
-create table if not exists users(
-    id serial primary key,
-    first_name varchar(255),
-    last_name varchar(255),
-    email varchar(255),
-    login varchar(255) UNIQUE,
-    password varchar(255),
-    confirmed boolean not null
-);
+/*
 
 create table if not exists user_role(
     id serial primary key,
@@ -118,3 +92,4 @@ create table if not exists class_day (
      class_day_id int references class_day(id),
      lesson_id int references lesson(id)
  );
+*/

@@ -1,6 +1,7 @@
 package ru.sevastopall.schoolapp.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.Role;
@@ -10,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SimpleRoleService implements RoleService {
     private final RoleRepository roles;
