@@ -12,7 +12,8 @@
 - **Java 17**
 - **Spring Boot 2.7.10**
 - **PostgreSQL 14**
-- **Spring (Data, MVC)**
+- **Spring (Boot, Data, MVC)**
+- **JUnit 5, AssertJ, Mockito,Test Containers**
 
 ### Запуск
 Из IDE: Main.class /src/main/java/ru.sevastopall.schoolapp
