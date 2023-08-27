@@ -20,9 +20,7 @@ public class StudentController {
     private MarkService marks;
     private StudentService students;
     private UserService users;
-
     private XLSXReportMaker maker;
-
     private ReportSender sender;
 
     @GetMapping("/{id}")
@@ -43,5 +41,4 @@ public class StudentController {
         maker.makeStudentReport(id);
         return sender.sendReport();
     }
-
 }

@@ -72,5 +72,4 @@ public class ClassesController {
         model.addAttribute("avgMark", studentMarks.stream().mapToInt(m -> m.getScore().getDescription()).average().orElse(0));
         return "admin/students/one";
     }
-
 }

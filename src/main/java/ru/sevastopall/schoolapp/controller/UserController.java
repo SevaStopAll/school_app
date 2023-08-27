@@ -20,7 +20,6 @@ import java.util.*;
 @AllArgsConstructor
 @ThreadSafe
 public class UserController {
-
     private final SimpleUserService userService;
     private final SimpleRoleService roles;
     private TeacherService teachers;

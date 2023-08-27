@@ -19,9 +19,7 @@ public class TeacherLessonController {
     private SchoolClassService classes;
     private SubjectService subjects;
     private LessonService lessons;
-
     private StudentService students;
-
     private ScoreService scores;
 
     @GetMapping("/teachers/create")
@@ -112,5 +110,4 @@ public class TeacherLessonController {
         model.addAttribute("score", scores.findAll());
         return "admin/lessons/one";
         }
-
 }

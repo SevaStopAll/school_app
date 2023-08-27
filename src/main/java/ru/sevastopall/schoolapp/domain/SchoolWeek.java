@@ -16,8 +16,10 @@ public class SchoolWeek {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+
     @Column(name = "start_day")
     LocalDate startDay;
+
     @Column(name = "end_day")
     LocalDate endDay;
 }

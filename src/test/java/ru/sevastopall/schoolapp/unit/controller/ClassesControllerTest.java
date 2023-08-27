@@ -52,7 +52,6 @@ class ClassesControllerTest {
         assertThat(view).isEqualTo("admin/classes/create");
     }
 
-
     @Test
     public void whenSaveClassThenRedirect() {
         SchoolClass class1 = new SchoolClass(1, "1a");
@@ -64,6 +63,5 @@ class ClassesControllerTest {
         assertThat(view).isEqualTo("redirect:/");
         assertThat(actualClass).isEqualTo(class1);
     }
-
 
 }

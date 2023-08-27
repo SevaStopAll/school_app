@@ -71,7 +71,6 @@ public class ScheduleController {
         return "admin/schedule/week/one";
     }
 
-
     @GetMapping("/schedule/day/create")
     public String getDayCreationPage(Model model) {
         model.addAttribute("weeks", weeks.findAll());

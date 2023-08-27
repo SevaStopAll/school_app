@@ -25,36 +25,43 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     /**
      * Имя пользователя
      */
     @Column(name = "first_name")
     private String firstName;
+
     /**
      * Фамилия пользователя
      */
     @Column(name = "last_name")
     private String lastName;
+
     /**
      * Электронная почта пользователя
      */
     @Column(name = "email")
     private String email;
+
     /**
      * Логин пользователя
      */
     @Column(name = "login")
     private String login;
+
     /**
      * Пароль пользователя
      */
     @Column(name = "password")
     private String password;
+
     /**
      * Подтверждение учетной записи администратором
      */
     @Column(name = "confirmed")
     private boolean confirmed;
+
     /**
      * Роли пользователя хранятся в коллекции List
      */
