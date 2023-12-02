@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.sevastopall.schoolapp.integration.IntegrationTestBase;
 import ru.sevastopall.schoolapp.repository.RoleRepository;
-import ru.sevastopall.schoolapp.service.SimpleRoleService;
+import ru.sevastopall.schoolapp.service.impl.SimpleRoleService;
 
 
 @RequiredArgsConstructor

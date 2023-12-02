@@ -1,4 +1,4 @@
-package ru.sevastopall.schoolapp.service;
+package ru.sevastopall.schoolapp.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.SchoolDay;
 import ru.sevastopall.schoolapp.domain.SchoolWeek;
 import ru.sevastopall.schoolapp.repository.SchoolDayRepository;
+import ru.sevastopall.schoolapp.service.SchoolDayService;
 
 import java.util.Collection;
 import java.util.Optional;

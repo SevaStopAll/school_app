@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.sevastopall.schoolapp.integration.IntegrationTestBase;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.UserRepository;
-import ru.sevastopall.schoolapp.service.SimpleUserService;
+import ru.sevastopall.schoolapp.service.impl.SimpleUserService;
 
 import java.util.List;
 import java.util.Optional;

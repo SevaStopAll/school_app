@@ -1,4 +1,4 @@
-package ru.sevastopall.schoolapp.service;
+package ru.sevastopall.schoolapp.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,7 @@ import ru.sevastopall.schoolapp.domain.SchoolClass;
 import ru.sevastopall.schoolapp.domain.Subject;
 import ru.sevastopall.schoolapp.domain.Teacher;
 import ru.sevastopall.schoolapp.repository.LessonRepository;
+import ru.sevastopall.schoolapp.service.LessonService;
 
 import java.time.LocalDate;
 import java.util.Collection;

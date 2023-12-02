@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 @SpringBootApplication
-public class Main {
+public class Application {
     private static String loadSysEnvIfNullThenConfig(String sysEnv, String key, Properties config) {
         String value = System.getenv(sysEnv);
         if (value == null) {
@@ -22,7 +22,7 @@ public class Main {
 
     private static Connection loadConnection() throws ClassNotFoundException, SQLException {
         var config = new Properties();
-        try (InputStream in = Main.class.getClassLoader()
+        try (InputStream in = Application.class.getClassLoader()
                 .getResourceAsStream("application.properties")) {
             config.load(in);
         } catch (IOException e) {
@@ -40,7 +40,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(Application.class, args);
         System.out.println("App is here: http://localhost:8080/");
     }
 }

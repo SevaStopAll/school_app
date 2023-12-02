@@ -1,10 +1,11 @@
-package ru.sevastopall.schoolapp.service;
+package ru.sevastopall.schoolapp.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.UserRepository;
+import ru.sevastopall.schoolapp.service.UserService;
 
 import java.util.List;
 import java.util.Optional;

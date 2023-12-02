@@ -1,10 +1,11 @@
-package ru.sevastopall.schoolapp.service;
+package ru.sevastopall.schoolapp.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sevastopall.schoolapp.domain.Score;
 import ru.sevastopall.schoolapp.repository.ScoreRepository;
+import ru.sevastopall.schoolapp.service.ScoreService;
 
 import java.util.Optional;
 import java.util.Set;
