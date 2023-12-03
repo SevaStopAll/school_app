@@ -21,14 +21,22 @@ class SimpleUserServiceTest extends IntegrationTestBase {
 
     @Test
     public void whenFindAll() {
+        //Act
         List<User> users = simpleUserService.findAll();
-        users.forEach(System.out::println);
+
+        //Assert
         assertThat(users.size()).isEqualTo(2);
     }
 
     @Test
     public void whenFindById() {
+        //Arrange
+        int testId = 5;
+
+        //Act
         Optional<User> maybeUser = simpleUserService.findById(5);
+
+        //Assert
         Assertions.assertThat(maybeUser.get().getId()).isEqualTo(5);
     }
 

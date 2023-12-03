@@ -35,31 +35,44 @@ class ClassesControllerTest {
 
     @Test
     public void whenRequestClassesListThenGetPageWithClasses() {
+        //Arrange
         SchoolClass class1 = new SchoolClass(1, "class1");
         SchoolClass class2 = new SchoolClass(2, "class2");
         Set<SchoolClass> classes = Set.of(class1, class2);
-        when(classService.findAll()).thenReturn(classes);
         var model = new ConcurrentModel();
+        when(classService.findAll()).thenReturn(classes);
+
+        //Act
         var view = classesController.getClasses(model);
         var actualClasses = model.getAttribute("classes");
+
+        //Assert
         assertThat(view).isEqualTo("admin/classes/list");
         assertThat(actualClasses).isEqualTo(classes);
     }
 
     @Test
     public void whenRequestCreateClassThenGetCreationClass() {
+        //Act
         var view = classesController.getClassCreationPage();
+
+        //Assert
         assertThat(view).isEqualTo("admin/classes/create");
     }
 
     @Test
     public void whenSaveClassThenRedirect() {
+        //Assert
         SchoolClass class1 = new SchoolClass(1, "1a");
         var classArgumentCaptor = ArgumentCaptor.forClass(SchoolClass.class);
         when(classService.save(classArgumentCaptor.capture())).thenReturn(Optional.of(class1));
         var model = new ConcurrentModel();
+
+        //Act
         var view = classesController.saveClass(class1);
         var actualClass = classArgumentCaptor.getValue();
+
+        //Assert
         assertThat(view).isEqualTo("redirect:/");
         assertThat(actualClass).isEqualTo(class1);
     }
