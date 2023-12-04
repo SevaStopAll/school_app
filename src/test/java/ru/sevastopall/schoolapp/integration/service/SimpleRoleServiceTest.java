@@ -9,7 +9,7 @@ import ru.sevastopall.schoolapp.service.impl.SimpleRoleService;
 
 
 @RequiredArgsConstructor
-class SimpleRoleServiceTest extends IntegrationTestBase {
+public class SimpleRoleServiceTest extends IntegrationTestBase {
     RoleRepository roleRepository;
 
     @Autowired

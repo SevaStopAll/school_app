@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SimpleNewsServiceTest extends IntegrationTestBase {
+public class SimpleNewsServiceTest extends IntegrationTestBase {
     @Autowired
     private SimpleNewsService simpleNewsService;
 

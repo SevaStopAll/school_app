@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SimpleUserServiceTest extends IntegrationTestBase {
+public class SimpleUserServiceTest extends IntegrationTestBase {
     UserRepository userRepository;
     @Autowired
     private final SimpleUserService simpleUserService = new SimpleUserService(userRepository);

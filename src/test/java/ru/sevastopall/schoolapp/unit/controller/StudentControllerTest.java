@@ -11,7 +11,7 @@ import ru.sevastopall.schoolapp.utils.XLSXReportMaker;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-class StudentControllerTest {
+public class StudentControllerTest {
 
     private HomeworkService homeworks;
     private MarkService marks;

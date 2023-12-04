@@ -18,7 +18,7 @@ import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
-class ClassesControllerTest {
+public class ClassesControllerTest {
 
     private ClassesController classesController;
     private SchoolClassService classService;
