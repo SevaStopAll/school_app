@@ -3,7 +3,7 @@ package ru.sevastopall.schoolapp.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sevastopall.schoolapp.domain.Chat;
-import ru.sevastopall.schoolapp.domain.Message;
+import ru.sevastopall.schoolapp.domain.ChatMessage;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.ChatRepository;
 import ru.sevastopall.schoolapp.service.ChatService;
@@ -29,7 +29,7 @@ public class SimpleChatService implements ChatService {
     }
 
     @Override
-    public List<Chat> findByMessagesContaining(Message message) {
+    public List<Chat> findByMessagesContaining(ChatMessage message) {
         return chatRepository.findByMessagesContaining(message);
     }
 

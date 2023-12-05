@@ -1,6 +1,7 @@
 package ru.sevastopall.schoolapp.service;
 
 import ru.sevastopall.schoolapp.domain.Chat;
+import ru.sevastopall.schoolapp.domain.ChatMessage;
 import ru.sevastopall.schoolapp.domain.Message;
 import ru.sevastopall.schoolapp.domain.User;
 
@@ -14,5 +15,5 @@ public interface ChatService {
 
     Chat findById(Long id);
 
-    List<Chat> findByMessagesContaining(Message message);
+    List<Chat> findByMessagesContaining(ChatMessage message);
 }

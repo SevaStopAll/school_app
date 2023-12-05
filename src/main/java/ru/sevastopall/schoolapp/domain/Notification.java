@@ -9,34 +9,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.TreeSet;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "chat")
-public class Chat {
+@Table(name = "notifications")
+public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "chat_name")
-    private String chatName;
+    @Column(name = "text")
+    private String text;
 
-    @ManyToMany
-            //TODO доделать маппинг
-    private List<User> participants;
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
-    @OneToMany
-    //TODO доделать маппинг
-    private TreeSet<Message> messages;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "is_read")
+    private boolean isRead;
 
 }

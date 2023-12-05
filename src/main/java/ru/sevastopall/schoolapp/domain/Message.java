@@ -13,12 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "news")
+@Table(name = "message")
 public class Message {
 
     @Id
@@ -35,4 +36,7 @@ public class Message {
 
     @Column
     private String text;
+
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 }

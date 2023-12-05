@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SimpleChatServiceTest extends IntegrationTestBase {
 
     @Autowired private SimpleChatService simpleChatService;
+    @Autowired private SimpleMessageService simpleMessageService;
 
     @Test
     public void whenSave() {
