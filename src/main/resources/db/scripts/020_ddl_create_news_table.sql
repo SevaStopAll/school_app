@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS news(
    );
 
 
-comment on table news is 'Таблица новостей';
-comment on column news.id is 'Идентификатор новости';
-comment on column news.header is 'Заголовок';
-comment on column news.description is 'Текст новости';
-comment on column news.user_id is 'Пользователь, разместивший новость';
+comment on table news is 'РўР°Р±Р»РёС†Р° РЅРѕРІРѕСЃС‚РµР№';
+comment on column news.id is 'РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РЅРѕРІРѕСЃС‚Рё';
+comment on column news.header is 'Р—Р°РіРѕР»РѕРІРѕРє';
+comment on column news.description is 'РўРµРєСЃС‚ РЅРѕРІРѕСЃС‚Рё';
+comment on column news.user_id is 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ, СЂР°Р·РјРµСЃС‚РёРІС€РёР№ РЅРѕРІРѕСЃС‚СЊ';

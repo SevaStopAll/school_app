@@ -17,7 +17,7 @@ public class SimpleChatMessageServiceTest extends IntegrationTestBase {
 
 
         //Act
-        service.
+
 
         //Assert
     }

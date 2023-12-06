@@ -4,15 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TreeSet;
@@ -22,6 +14,13 @@ import java.util.TreeSet;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "chat")
+@NamedEntityGraph(
+        name = "chat-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("messages"),
+                @NamedAttributeNode("participants"),
+        }
+)
 public class Chat {
 
     @Id
@@ -31,12 +30,14 @@ public class Chat {
     @Column(name = "chat_name")
     private String chatName;
 
-    @ManyToMany
-            //TODO доделать маппинг
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "user_chat",
+            joinColumns = { @JoinColumn(name = "chat_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
     private List<User> participants;
 
-    @OneToMany
-    //TODO доделать маппинг
-    private TreeSet<Message> messages;
-
+    @OneToMany(mappedBy = "chat")
+    private List<ChatMessage> messages;
 }
