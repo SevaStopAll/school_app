@@ -25,14 +25,10 @@ Fronend:
 - **JUnit 5, AssertJ, Mockito,testContainers**
 
 ### Запуск
-Из IDE: Main.class /src/main/java/ru.sevastopall.schoolapp
+Из IDE: Application.class /src/main/java/ru.sevastopall.schoolapp
 
 Docker-Compose:
-1. клонируем проект через git clone; 
-2. переходим в папку проекта;
-3. вводим команду docker-compose build;
-4. после завершения сборки вводим docker-compose up;
-5. работа с проектом доступна через http://127.0.0.1 / http://127.0.0.1:80;
+1. В стадии переработки. 
 
 ### Требования:
 - **Java 17**

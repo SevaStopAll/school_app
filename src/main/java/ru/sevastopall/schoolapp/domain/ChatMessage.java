@@ -25,7 +25,7 @@ public class ChatMessage {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "chat_name")
+    @JoinColumn(name = "chat_id")
     private Chat chat;
 
     @Column(name = "text")
@@ -33,4 +33,5 @@ public class ChatMessage {
 
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
+
 }
