@@ -80,6 +80,50 @@
             </tbody>
         </table>
     </div>
+
+    <div class="container">
+        <form class="mt-3" th:action="@{/messenger/messages/create}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="receiver" class="form-label"><b>Кому</b></label>
+                <input type="text" class="form-control" id="receiver" name="receiver" placeholder="Выберите отправителя">
+            </div>
+
+            <div class="mb-3">
+                <label for="text" class="form-label"><b>Текст сообщения</b></label>
+                <input type="text" class="form-control" id="text" name="text" placeholder="Введите текст">
+            </div>
+
+            <div class="mb-3">
+                <label for="sender" class="form-label"><b>Отправитель</b></label>
+                <input type="text" class="form-control" id="sender" name="sender" placeholder="Введите текст">
+            </div>
+
+            <div class="form-group">
+                <label for="sender.id" name="senderIds">Учителя</label>
+                <select class="form-control" id="sender.id" name="senderIds" multiple>
+                    <option th:each="user: ${users}"
+                            th:text="${user.lastName} + ${user.firstName}"
+                            th:value="${user.id}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="timestamp" class="form-label"><b>Время</b></label>
+                <input type="text" class="form-control" id="timestamp" name="timestamp" placeholder="Введите текст">
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/index}">Отмена</a></div>
+                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Опубликовать новость</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
