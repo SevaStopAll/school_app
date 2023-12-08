@@ -40,5 +40,6 @@ public class MessageController {
         model.addAttribute("chatMessages", messages);
         return "/messenger/chats/one";
     }
+
 }
 
