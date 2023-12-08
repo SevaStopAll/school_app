@@ -23,4 +23,8 @@ public class SimpleNotificationService implements NotificationService {
     public List<Notification> findByUser(User user) {
         return notificationRepository.findAllByUser(user);
     }
+    @Override
+    public List<Notification> findByUserUnread(User user) {
+        return notificationRepository.findByUserAndReadIsFalse(user);
+    }
 }

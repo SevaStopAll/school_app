@@ -9,4 +9,6 @@ public interface NotificationService {
     Notification save(Notification notification);
 
     List<Notification> findByUser(User user);
+
+    List<Notification> findByUserUnread(User user);
 }

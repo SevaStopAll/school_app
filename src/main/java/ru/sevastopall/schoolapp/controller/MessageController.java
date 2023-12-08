@@ -3,19 +3,16 @@ package ru.sevastopall.schoolapp.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.schoolapp.domain.ChatMessage;
-import ru.sevastopall.schoolapp.domain.SchoolDay;
-import ru.sevastopall.schoolapp.domain.SchoolWeek;
+import ru.sevastopall.schoolapp.domain.Message;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.service.ChatMessageService;
 import ru.sevastopall.schoolapp.service.ChatService;
 import ru.sevastopall.schoolapp.service.MessageService;
+import ru.sevastopall.schoolapp.service.UserService;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -24,13 +21,14 @@ import java.util.List;
 public class MessageController {
     private final MessageService messageService;
     private final ChatService chatService;
-
+    private final UserService userService;
     private final ChatMessageService chatMessageService;
 
     @GetMapping("/messages/all")
     public String getMessageList(Model model, HttpSession session) {
         model.addAttribute("messages", messageService.findByReceiver((User) session.getAttribute("user")));
         model.addAttribute("chats", chatService.findByParticipantsContaining((User) session.getAttribute("user")));
+        model.addAttribute("users", userService.findAll());
         return "/messenger/messages/all";
     }
 
@@ -41,5 +39,11 @@ public class MessageController {
         return "/messenger/chats/one";
     }
 
+    @PostMapping("/messages/create")
+    public String saveSubject(@ModelAttribute Message message, String[] usersIds) {
+        message.setReceiver(userService.findById(Integer.parseInt(usersIds[0])).get());
+        messageService.save(message);
+        return "redirect:/";
+    }
 }
 

@@ -22,7 +22,7 @@ public class IndexController {
     @GetMapping("/")
     public String getClassCreationPage(Model model, HttpSession session) {
         model.addAttribute("news", newsService.findAll());
-        model.addAttribute("notifications", notificationService.findByUser((User) session.getAttribute("user")));
+        model.addAttribute("notifications", notificationService.findByUserUnread((User) session.getAttribute("user")));
         return "index";
     }
 }

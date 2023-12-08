@@ -95,7 +95,7 @@
             <tbody>
             <tr th:each="notification: ${notifications}">
                 <td th:text="${notification.text}" />
-                <td><a th:text="${notification.timestamp}"></a></td>
+                <td>th:text="${notification.timestamp}"></td>
                 <td th:text="${notification.user.lastName}" />
             </tr>
             </tbody>
