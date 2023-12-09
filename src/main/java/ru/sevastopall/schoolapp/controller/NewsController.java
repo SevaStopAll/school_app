@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sevastopall.schoolapp.domain.News;
+import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.service.NewsService;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -15,8 +18,15 @@ public class NewsController {
 
     private final NewsService newsService;
 
+
+    @GetMapping("/news/create")
+    public String getCreationPage() {
+        return "admin/news/create";
+    }
+
     @PostMapping("/news/create")
-    public String saveNews(@ModelAttribute News news) {
+    public String saveNews(@ModelAttribute News news, HttpSession session) {
+        news.setUser((User)session.getAttribute("user"));
         newsService.save(news);
         return "redirect:/";
     }
