@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS notifications (
     user_id int references users(id),
     text varchar(16512),
     "timestamp" timestamp without time zone,
-    read boolean DEFAULT FALSE
+    "read" boolean DEFAULT FALSE
 );
 
 comment on table message is 'Таблица сообщений';
