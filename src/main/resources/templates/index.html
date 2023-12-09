@@ -87,16 +87,14 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Заголовок</th>
                 <th scope="col">Текст</th>
-                <th scope="col">Опубликовал</th>
+                <th scope="col">Время</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="notification: ${notifications}">
                 <td th:text="${notification.text}" />
-                <td>th:text="${notification.timestamp}"></td>
-                <td th:text="${notification.user.lastName}" />
+                <td th:text="${notification.timestamp}"></td>
             </tr>
             </tbody>
         </table>

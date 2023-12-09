@@ -56,10 +56,36 @@
             <tbody>
             <tr th:each="message: ${chatMessages}">
                 <td th:text="${message.text}"/>
+                <td th:text="${message.sender.lastName}"/>
                 <td th:text="${message.timestamp}"/>
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="container">
+        <form class="mt-3" th:action="@{/messenger/chats/createMessage}" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label for="text" class="form-label"><b>Текст сообщения</b></label>
+                <input type="text" class="form-control" id="text" name="text" placeholder="Введите текст">
+            </div>
+
+            <div class="mb-3">
+                <input type="hidden" th:value="${chatId}" th:attr="name='chatId'"/>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6"><a class="btn btn-danger w-100" th:href="@{/index}">Отмена</a></div>
+                        <div class="col-6"><button class="btn btn-primary w-100" type="submit">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>

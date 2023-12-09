@@ -26,5 +26,6 @@
     <include file="db/scripts/019_dml_insert_users_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/020_ddl_create_news_table.sql" relativeToChangelogFile="true"/>
     <include file="db/scripts/021_ddl_create_message_chats_table.sql" relativeToChangelogFile="true"/>
+    <include file="db/scripts/022_ddl_alter_chat_message_table.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

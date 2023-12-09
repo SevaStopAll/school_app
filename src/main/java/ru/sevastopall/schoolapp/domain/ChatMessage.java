@@ -34,4 +34,8 @@ public class ChatMessage {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
 }
