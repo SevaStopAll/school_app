@@ -8,6 +8,8 @@ import ru.sevastopall.schoolapp.domain.*;
 import ru.sevastopall.schoolapp.service.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,14 +35,10 @@ public class ScheduleController {
 
     @PostMapping("/schedule/week/create")
     public String saveSchoolWeek(@ModelAttribute SchoolWeek schoolWeek,
-                                 String startDate1, String startDate2, String startDate3,
-                                 String endDate1, String endDate2, String endDate3) {
-        schoolWeek.setStartDay(LocalDate.of(
-                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
-        ));
-        schoolWeek.setEndDay(LocalDate.of(
-                Integer.parseInt(endDate3), Integer.parseInt(endDate2), Integer.parseInt(endDate1)
-        ));
+                                 String startDate1, String endDate1) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        schoolWeek.setStartDay(LocalDate.parse(startDate1, formatter));
+        schoolWeek.setEndDay(LocalDate.parse(endDate1, formatter));
         weeks.save(schoolWeek);
         for (int i = 0; i < 5; i++) {
             SchoolDay day = new SchoolDay();

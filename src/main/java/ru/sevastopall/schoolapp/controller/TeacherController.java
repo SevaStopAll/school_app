@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.sevastopall.schoolapp.domain.Homework;
-import ru.sevastopall.schoolapp.domain.Mark;
-import ru.sevastopall.schoolapp.domain.Teacher;
+import ru.sevastopall.schoolapp.domain.*;
 import ru.sevastopall.schoolapp.service.*;
 import ru.sevastopall.schoolapp.utils.ReportSender;
 import ru.sevastopall.schoolapp.utils.XLSXReportMaker;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/teacher")
@@ -28,6 +28,10 @@ public class TeacherController {
     private XLSXReportMaker maker;
     private ReportSender sender;
 
+    private NotificationService notificationService;
+
+
+
     @GetMapping("/homework/create")
     public String getHomeworkCreationPage(Model model) {
         model.addAttribute("classes", classes.findAll());
@@ -40,6 +44,13 @@ public class TeacherController {
    @PostMapping("/homework/create")
     public String save(@ModelAttribute Homework homework) {
         homeworks.add(homework);
+        homework.getSchoolClass().getStudents().stream().forEach(student -> {
+            notificationService.save(Notification.builder()
+                    .text("You have a new message homework for your class on " + homework.getSubject().getName())
+                    .timestamp(LocalDateTime.now())
+                    .user(student.getUser())
+                    .build());
+        });
         return "redirect:/";
     }
 
@@ -55,10 +66,20 @@ public class TeacherController {
     @PostMapping("/mark/new")
     public String saveMark(@ModelAttribute Mark mark, String student, String subject, String teacher, String scoreId) {
         mark.setScore(score.findById(Integer.parseInt(scoreId)).get());
-        mark.setStudent(students.findById(Integer.parseInt(student)).get());
-        mark.setTeacher(teachers.findById(Integer.parseInt(teacher)).get());
-        mark.setSubject(subjects.findById(Integer.parseInt(subject)).get());
+        Student studentWhoGot = students.findById(Integer.parseInt(student)).get();
+        mark.setStudent(studentWhoGot);
+        Teacher teacherWho = teachers.findById(Integer.parseInt(teacher)).get();
+        mark.setTeacher(teacherWho);
+        Subject subjectWhere = subjects.findById(Integer.parseInt(subject)).get();
+        mark.setSubject(subjectWhere);
         marks.save(mark);
+        notificationService.save(
+                Notification.builder()
+                        .user(studentWhoGot.getUser())
+                        .text(new StringBuilder().append("You have a new mark from ").append(teacherWho.getLastName()).append(" ").append(subjectWhere.getName()).toString())
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
         return "redirect:/";
     }
 

@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -19,24 +18,24 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "message")
-public class Message {
-
+@Table(name = "chat_message")
+public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
+    @JoinColumn(name = "chat_id")
+    private Chat chat;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    private User receiver;
-
-    @Column
+    @Column(name = "text")
     private String text;
 
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
 }
