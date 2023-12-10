@@ -20,7 +20,7 @@ public class SchoolClass {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "class_id")
     private List<Student> students;
 }

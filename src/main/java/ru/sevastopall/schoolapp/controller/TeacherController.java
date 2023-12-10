@@ -30,8 +30,7 @@ public class TeacherController {
 
     private NotificationService notificationService;
 
-    //TODO ТЕСТИРОВАНИЕ ВЫСТАВЛЕНИЯ ОЦЕНОК И ДОМАШНЕЙ РАБОТЫ (УВЕДОМЛЕНИЯ)
-    //TODO ПЕРЕНЕСТИ ЛОГИКУ УВЕДОМЛЕНИЙ НА УРОВЕНЬ СЕРВИСА.
+
 
     @GetMapping("/homework/create")
     public String getHomeworkCreationPage(Model model) {
@@ -47,7 +46,7 @@ public class TeacherController {
         homeworks.add(homework);
         homework.getSchoolClass().getStudents().stream().forEach(student -> {
             notificationService.save(Notification.builder()
-                    .text("You have a new message homework for your class from" + homework.getTeacher().getLastName())
+                    .text("You have a new message homework for your class on " + homework.getSubject().getName())
                     .timestamp(LocalDateTime.now())
                     .user(student.getUser())
                     .build());
@@ -67,7 +66,8 @@ public class TeacherController {
     @PostMapping("/mark/new")
     public String saveMark(@ModelAttribute Mark mark, String student, String subject, String teacher, String scoreId) {
         mark.setScore(score.findById(Integer.parseInt(scoreId)).get());
-        mark.setStudent(students.findById(Integer.parseInt(student)).get());
+        Student studentWhoGot = students.findById(Integer.parseInt(student)).get();
+        mark.setStudent(studentWhoGot);
         Teacher teacherWho = teachers.findById(Integer.parseInt(teacher)).get();
         mark.setTeacher(teacherWho);
         Subject subjectWhere = subjects.findById(Integer.parseInt(subject)).get();
@@ -75,7 +75,8 @@ public class TeacherController {
         marks.save(mark);
         notificationService.save(
                 Notification.builder()
-                        .text(new StringBuilder().append("You have a new mark from ").append(teacherWho.getLastName()).append(subjectWhere.getName()).toString())
+                        .user(studentWhoGot.getUser())
+                        .text(new StringBuilder().append("You have a new mark from ").append(teacherWho.getLastName()).append(" ").append(subjectWhere.getName()).toString())
                         .timestamp(LocalDateTime.now())
                         .build()
         );
