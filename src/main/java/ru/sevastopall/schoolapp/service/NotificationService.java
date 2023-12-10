@@ -11,4 +11,6 @@ public interface NotificationService {
     List<Notification> findByUser(User user);
 
     List<Notification> findByUserUnread(User user);
+
+    Notification findById(long id);
 }
