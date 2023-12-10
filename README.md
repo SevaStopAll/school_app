@@ -57,4 +57,3 @@ Docker-Compose:
 
 ![](src/main/resources/static/LessonScreen.png)
 
-
