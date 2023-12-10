@@ -55,11 +55,11 @@ public class MessageController {
                         .timestamp(timestamp)
                         .user(userReciever)
                 .build());
-        return "redirect:/";
+        return "redirect:/messenger/messages/all";
     }
 
     @PostMapping("/chats/createMessage")
-    public String saveChatMessage(@ModelAttribute ChatMessage message, HttpSession httpSession, long chatId) {
+    public String saveChatMessage(@ModelAttribute ChatMessage message, HttpSession httpSession, long chatId, Model model) {
         User userSender = (User) httpSession.getAttribute("user");
         message.setSender(userSender);
         message.setChat(chatService.findById(chatId));
@@ -72,7 +72,7 @@ public class MessageController {
                     .user(user)
                     .build());
         });
-        return "redirect:/";
+        return "redirect:/messenger/chats/" + chatId;
     }
 }
 
