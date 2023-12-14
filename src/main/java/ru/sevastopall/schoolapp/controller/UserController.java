@@ -15,6 +15,8 @@ import ru.sevastopall.schoolapp.service.impl.SimpleUserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Controller
@@ -43,6 +45,7 @@ public class UserController {
             roleSet.add(roles.findById(Integer.parseInt(id)).get());
         }
         user.setRoles(roleSet);
+        user.setLogin(getMd5Hash(user.getLogin()));
         var savedUser = userService.create(user);
         if (user.getRoles().get(0).getName().equals("Teacher")) {
             teacherRegister(user);
@@ -81,7 +84,7 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
         var userOptional = userService
-                .findUserByLoginAndPassword(user.getLogin(), user.getPassword());
+                .findUserByLoginAndPassword(getMd5Hash(user.getLogin()), user.getPassword());
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "error/404";
@@ -127,6 +130,25 @@ public class UserController {
         user.setConfirmed(true);
         userService.create(user);
         return "users/list";
+    }
+
+    public String getMd5Hash(String source) {
+        try {
+            var md = MessageDigest.getInstance("MD5");
+            md.update(source.getBytes());
+            byte[] digest = md.digest();
+            return bytesToHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        var builder = new StringBuilder();
+        for (var b : bytes) {
+            builder.append(String.format("%02x", b & 0xff));
+        }
+        return builder.toString();
     }
 }
 
