@@ -45,7 +45,7 @@ public class UserController {
             roleSet.add(roles.findById(Integer.parseInt(id)).get());
         }
         user.setRoles(roleSet);
-        user.setLogin(getMd5Hash(user.getLogin()));
+        user.setPassword(getMd5Hash(user.getLogin()));
         var savedUser = userService.create(user);
         if (user.getRoles().get(0).getName().equals("Teacher")) {
             teacherRegister(user);
@@ -84,7 +84,7 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
         var userOptional = userService
-                .findUserByLoginAndPassword(getMd5Hash(user.getLogin()), user.getPassword());
+                .findUserByLoginAndPassword(user.getLogin(), getMd5Hash(user.getPassword()));
         if (userOptional.isEmpty()) {
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "error/404";
