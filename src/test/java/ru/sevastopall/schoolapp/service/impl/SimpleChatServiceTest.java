@@ -67,15 +67,16 @@ public class SimpleChatServiceTest extends IntegrationTestBase {
         //Arrange
         Chat chat = new Chat();
         ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setText("text");
         ChatMessage savedChatMessage = simpleChatMessageService.save(chatMessage);
         chat.setMessages(List.of(savedChatMessage));
         Chat savedChat = simpleChatService.save(chat);
 
         //Act
-        List<Chat> result = simpleChatService.findByMessagesContaining(savedChatMessage);
+        Chat result = simpleChatService.findByMessagesContaining(savedChatMessage);
 
         //Assert
-        Assertions.assertThat(result.contains(savedChat)).isTrue();
+        Assertions.assertThat(result).isEqualTo(savedChat);
     }
 
 
