@@ -3,8 +3,13 @@ package ru.sevastopall.schoolapp.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.sevastopall.schoolapp.domain.*;
-import ru.sevastopall.schoolapp.repository.*;
+import ru.sevastopall.schoolapp.domain.Lesson;
+import ru.sevastopall.schoolapp.domain.Mark;
+import ru.sevastopall.schoolapp.domain.SchoolClass;
+import ru.sevastopall.schoolapp.domain.Student;
+import ru.sevastopall.schoolapp.domain.Subject;
+import ru.sevastopall.schoolapp.domain.Teacher;
+import ru.sevastopall.schoolapp.repository.MarkRepository;
 import ru.sevastopall.schoolapp.service.LessonService;
 import ru.sevastopall.schoolapp.service.MarkService;
 

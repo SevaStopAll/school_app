@@ -10,7 +10,6 @@ import ru.sevastopall.schoolapp.domain.Notification;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.service.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;

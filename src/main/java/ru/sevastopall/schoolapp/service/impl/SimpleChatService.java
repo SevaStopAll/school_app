@@ -3,7 +3,6 @@ package ru.sevastopall.schoolapp.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sevastopall.schoolapp.domain.Chat;
-import ru.sevastopall.schoolapp.domain.ChatMessage;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.repository.ChatRepository;
 import ru.sevastopall.schoolapp.service.ChatService;
