@@ -36,8 +36,10 @@ public class ClassesControllerTest {
     @Test
     public void whenRequestClassesListThenGetPageWithClasses() {
         //Arrange
-        SchoolClass class1 = new SchoolClass(1, "class1");
-        SchoolClass class2 = new SchoolClass(2, "class2");
+        SchoolClass class1 = new SchoolClass();
+        class1.setName("test1");
+        SchoolClass class2 = new SchoolClass();
+        class2.setName("test2");
         Set<SchoolClass> classes = Set.of(class1, class2);
         var model = new ConcurrentModel();
         when(classService.findAll()).thenReturn(classes);
@@ -63,7 +65,7 @@ public class ClassesControllerTest {
     @Test
     public void whenSaveClassThenRedirect() {
         //Assert
-        SchoolClass class1 = new SchoolClass(1, "1a");
+        SchoolClass class1 = new SchoolClass();
         var classArgumentCaptor = ArgumentCaptor.forClass(SchoolClass.class);
         when(classService.save(classArgumentCaptor.capture())).thenReturn(Optional.of(class1));
         var model = new ConcurrentModel();

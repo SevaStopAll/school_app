@@ -16,7 +16,7 @@ public class SimpleChatService implements ChatService {
     private final ChatRepository chatRepository;
 
     public Chat save(Chat chat) {
-        return chatRepository.save(chat);
+        return chatRepository.saveAndFlush(chat);
     }
 
     public Chat findById(Long id) {
@@ -29,8 +29,8 @@ public class SimpleChatService implements ChatService {
     }
 
     @Override
-    public List<Chat> findByMessagesContaining(ChatMessage message) {
-        return chatRepository.findByMessagesContaining(message);
+    public Chat findByMessagesContaining(String message) {
+        return chatRepository.findChatByMessagesContaining(message);
     }
 
 }

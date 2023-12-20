@@ -6,6 +6,7 @@ import ru.sevastopall.schoolapp.domain.News;
 import ru.sevastopall.schoolapp.domain.User;
 import ru.sevastopall.schoolapp.integration.IntegrationTestBase;
 import ru.sevastopall.schoolapp.service.impl.SimpleNewsService;
+import ru.sevastopall.schoolapp.service.impl.SimpleUserService;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SimpleNewsServiceTest extends IntegrationTestBase {
     @Autowired
     private SimpleNewsService simpleNewsService;
+    @Autowired private SimpleUserService simpleUserService;
 
     @Test
     public void whenSave() {
@@ -52,7 +54,9 @@ public class SimpleNewsServiceTest extends IntegrationTestBase {
         News news = new News();
         news.setDescription("test");
         news.setHeader("test");
-        news.setUser(new User());
+        User user = new User();
+        User savedUser = simpleUserService.create(user).get();
+        news.setUser(savedUser);
         simpleNewsService.save(news);
 
         //Act

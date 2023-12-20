@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SimpleNotificationServiceTest extends IntegrationTestBase {
     @Autowired private SimpleNotificationService service;
+    @Autowired private SimpleUserService simpleUserService;
 
     @Test
     public void whenSave_dataSaved() {
@@ -29,13 +30,16 @@ class SimpleNotificationServiceTest extends IntegrationTestBase {
     public void whenFind_dataFound() {
         //Arrange
         User user = new User();
+        User savedUser = simpleUserService.create(user).get();
         Notification notification = new Notification();
-        notification.setUser(user);
+        notification.setUser(savedUser);
         Notification notification2 = new Notification();
-        notification2.setUser(user);
+        notification2.setUser(savedUser);
+        service.save(notification);
+        service.save(notification2);
 
         //Act
-        List<Notification> result = service.findByUser(user);
+        List<Notification> result = service.findByUser(savedUser);
 
         //Assert
         assertThat(result.size()).isEqualTo(2);

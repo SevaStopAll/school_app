@@ -24,16 +24,4 @@ public abstract class IntegrationTestBase {
     static void postgresProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", container::getJdbcUrl);
     }
-
-    //TODO create init methods
-    public static User initUser() {
-        User user = new User();
-        user.setConfirmed(true);
-        user.setEmail("test@test.ru");
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setLogin("test");
-        user.setPassword("test");
-        user.setRoles();
-    }
 }

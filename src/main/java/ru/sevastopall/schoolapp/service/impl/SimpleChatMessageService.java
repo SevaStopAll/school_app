@@ -16,7 +16,7 @@ public class SimpleChatMessageService implements ChatMessageService {
 
     @Override
     public ChatMessage save(ChatMessage chatMessage) {
-        return chatMessageRepository.save(chatMessage);
+        return chatMessageRepository.saveAndFlush(chatMessage);
     }
 
     @Override
