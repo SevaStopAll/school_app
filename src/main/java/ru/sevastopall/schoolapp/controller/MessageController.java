@@ -74,5 +74,12 @@ public class MessageController {
         });
         return "redirect:/messenger/chats/" + chatId;
     }
+
+    //TODO решить проблему ленивой инициализации !
+    @PostMapping("/chats/findByMessage")
+    public String findByChatMessage(String textSearch, Model model) {
+        model.addAttribute("chats", chatService.findByMessagesContaining(textSearch));
+        return "/messenger/chats/search";
+    }
 }
 

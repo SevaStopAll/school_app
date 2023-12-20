@@ -29,8 +29,8 @@ public class SimpleChatService implements ChatService {
     }
 
     @Override
-    public Chat findByMessagesContaining(ChatMessage message) {
-        return chatRepository.findChatByMessagesContaining(message.getText());
+    public Chat findByMessagesContaining(String message) {
+        return chatRepository.findChatByMessagesContaining(message);
     }
 
 }

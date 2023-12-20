@@ -15,5 +15,5 @@ public interface ChatService {
 
     Chat findById(Long id);
 
-    Chat findByMessagesContaining(ChatMessage message);
+    Chat findByMessagesContaining(String message);
 }

@@ -73,7 +73,7 @@ public class SimpleChatServiceTest extends IntegrationTestBase {
         Chat savedChat = simpleChatService.save(chat);
 
         //Act
-        Chat result = simpleChatService.findByMessagesContaining(savedChatMessage);
+        Chat result = simpleChatService.findByMessagesContaining("text");
 
         //Assert
         Assertions.assertThat(result).isEqualTo(savedChat);
