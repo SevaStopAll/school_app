@@ -75,10 +75,9 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedule/day/create")
-    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay, String startDate1, String startDate2, String startDate3, String weekId) {
-        schoolDay.setDate(LocalDate.of(
-                Integer.parseInt(startDate3), Integer.parseInt(startDate2), Integer.parseInt(startDate1)
-        ));
+    public String saveSchoolDay(@ModelAttribute SchoolDay schoolDay, String date, String weekId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        schoolDay.setDate(LocalDate.parse(date, formatter));
         schoolDay.setWeek(weeks.findById(Integer.parseInt(weekId)).get());
         days.save(schoolDay);
         return "redirect:/";
